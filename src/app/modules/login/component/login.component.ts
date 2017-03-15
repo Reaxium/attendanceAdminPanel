@@ -16,8 +16,7 @@ export class LoginComponent {
   }
 
   validateLogin(): void {
-    console.log("Funciona la mamaguevada esta");
-    this.router.navigate(['/attendance']);
+    this.router.navigate(['/app']);
   }
 
 }

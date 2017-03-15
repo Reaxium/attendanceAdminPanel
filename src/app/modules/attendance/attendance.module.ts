@@ -10,13 +10,19 @@ import {DashboardComponent} from "./modules/dashboard/dashboard.component";
 
 const attendanceRoutes: Routes = [
   {
+    path: 'app',
+    redirectTo: '/attendance',
+    pathMatch: 'full'
+  },
+  {
     path: 'attendance',
     component: AttendanceComponent,
     children: [{
       path: "dashboard",
       component: DashboardComponent
     }]
-  }
+  },
+
 ];
 @NgModule({
   imports: [BrowserModule, DashboardModule, RouterModule.forRoot(attendanceRoutes)],
