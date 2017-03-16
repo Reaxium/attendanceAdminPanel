@@ -1,0 +1,12 @@
+<table>
+  <thead>
+  <tr>
+    <th *ngFor="let column of columns">{{column.header}}</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let row of dataSet">
+  <tr>
+    <td *ngFor="let column of columns">{{row[column.value]}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,20 @@
+[
+  {
+    "user_id":"1",
+    "first_name":"Eduardo",
+    "first_last_name":"Luttinger",
+    "document_id":"19044081"
+  },
+  {
+    "user_id":"2",
+    "first_name":"Vladimir",
+    "first_last_name":"Fernandez",
+    "document_id":"16589963"
+  },
+  {
+    "user_id":"3",
+    "first_name":"Andreina",
+    "first_last_name":"Cuello",
+    "document_id":"16846846"
+  }
+]

@@ -13,6 +13,7 @@ import {DevicesModule} from "./modules/devices/devices.module";
 import {DevicesComponent} from "./modules/devices/devices.component";
 import {BusinessComponent} from "./modules/business/business.component";
 import {BusinessModule} from "./modules/business/business.module";
+import {DataTableModule} from "../../util/data_table/datatable.module";
 
 const attendanceRoutes: Routes = [
   {
