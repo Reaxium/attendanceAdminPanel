@@ -4,7 +4,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
-import {Users} from "./users";
+import {Users} from "../../../../commons/beans/users";
 import {ResponseWithPagination} from "../../../../commons/beans/responseWithPagination";
 @Injectable()
 export class UsersService {

@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../users/users.service"
-import {Users} from "./users";
+import {Users} from "../../../../commons/beans/users";
 import {onDataTableListener} from "../../../../util/data_table/onDataTableListener";
 import {Http} from "@angular/http";
 
