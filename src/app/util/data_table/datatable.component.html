@@ -8,7 +8,8 @@
   <tbody
     *ngFor="let row of dataSet | paginate: {id: 'server', itemsPerPage: dataPerPage, currentPage: actualPage, totalItems:totalItems }">
   <tr>
-    <td *ngFor="let column of columns">{{row[column.value]}}</td>
+    <td *ngif="normal" *ngFor="let column of columns">{{row[column.value]}}</td>
+    <td *ngif="actions"></td>
   </tr>
   </tbody>
 </table>

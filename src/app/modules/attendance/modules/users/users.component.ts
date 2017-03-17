@@ -27,13 +27,12 @@ export class UsersComponent implements onDataTableListener, OnInit {
   }
 
   ngOnInit(): void {
-    this.getUsersSimulation();
+    this.getUsers();
   }
 
   getUsersSimulation(): Promise<Users[]> {
     return this.http.get("/app/data/users.json").toPromise().then(response => this.users = response.json() as Users[]);
   }
-
 
   getUsers(): void {
     var parameters = {
@@ -47,6 +46,7 @@ export class UsersComponent implements onDataTableListener, OnInit {
         }
       }
     };
+
     this.usersService.getUsers(parameters).then(response => {
       if (response.ReaxiumResponse.code == 0) {
         this.totalItems = response.ReaxiumResponse.object.totalRecords;
@@ -58,11 +58,11 @@ export class UsersComponent implements onDataTableListener, OnInit {
   }
 
   onDataTableSearch(query: string): void {
-    if (query.length > 3) {
-      this.actualQuery = query;
-      this.getUsers();
-    } else if (this.actualQuery == "") {
+    if (query == "") {
       this.actualQuery = "";
+      this.getUsers();
+    } else if (query.length > 3) {
+      this.actualQuery = query;
       this.getUsers();
     }
   }
@@ -76,6 +76,28 @@ export class UsersComponent implements onDataTableListener, OnInit {
   onPageChange(page: number): void {
     this.actualPage = page;
     this.getUsers();
+  }
+
+  getUsersObservable(): void {
+    var parameters = {
+      ReaxiumParameters: {
+        Users: {
+          business_id: 1,
+          filter: this.actualQuery,
+          page: this.actualPage,
+          sort: this.actualSort,
+          limit: this.dataPerPage
+        }
+      }
+    };
+    this.usersService.getUsersObservable(parameters).subscribe(response => {
+      if (response.ReaxiumResponse.code == 0) {
+        this.totalItems = response.ReaxiumResponse.object.totalRecords;
+        this.users = response.ReaxiumResponse.object.data;
+      } else {
+        this.users = [];
+      }
+    });
   }
 
 }
