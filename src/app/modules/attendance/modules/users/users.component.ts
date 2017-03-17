@@ -5,6 +5,8 @@ import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../users/users.service"
 import {Users} from "./users";
 import {onDataTableListener} from "../../../../util/data_table/onDataTableListener";
+import {Http} from "@angular/http";
+
 @Component({
   selector: 'users-component',
   templateUrl: "./app/modules/attendance/modules/users/users.component.html",
@@ -21,12 +23,17 @@ export class UsersComponent implements onDataTableListener, OnInit {
   actualQuery: string = "";
   actualSort: string = "first_name";
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, private http: Http) {
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getUsersSimulation();
   }
+
+  getUsersSimulation(): Promise<Users[]> {
+    return this.http.get("/app/data/users.json").toPromise().then(response => this.users = response.json() as Users[]);
+  }
+
 
   getUsers(): void {
     var parameters = {
@@ -41,20 +48,20 @@ export class UsersComponent implements onDataTableListener, OnInit {
       }
     };
     this.usersService.getUsers(parameters).then(response => {
-      if(response.ReaxiumResponse.code == 0){
+      if (response.ReaxiumResponse.code == 0) {
         this.totalItems = response.ReaxiumResponse.object.totalRecords;
         this.users = response.ReaxiumResponse.object.data;
-      }else{
+      } else {
         this.users = [];
       }
     });
   }
 
   onDataTableSearch(query: string): void {
-    if(query.length > 3){
+    if (query.length > 3) {
       this.actualQuery = query;
       this.getUsers();
-    }else if (this.actualQuery == ""){
+    } else if (this.actualQuery == "") {
       this.actualQuery = "";
       this.getUsers();
     }
