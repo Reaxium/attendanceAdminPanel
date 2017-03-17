@@ -13,7 +13,7 @@ import {DevicesModule} from "./modules/devices/devices.module";
 import {DevicesComponent} from "./modules/devices/devices.component";
 import {BusinessComponent} from "./modules/business/business.component";
 import {BusinessModule} from "./modules/business/business.module";
-import {DataTableModule} from "../../util/data_table/datatable.module";
+import {Ng2PaginationModule} from "ng2-pagination";
 
 const attendanceRoutes: Routes = [
   {
@@ -46,7 +46,15 @@ const attendanceRoutes: Routes = [
 
 ];
 @NgModule({
-  imports: [BrowserModule, DashboardModule, UsersModule, DevicesModule, BusinessModule, RouterModule.forRoot(attendanceRoutes)],
+  imports: [
+    BrowserModule,
+    DashboardModule,
+    UsersModule,
+    DevicesModule,
+    BusinessModule,
+    RouterModule.forRoot(attendanceRoutes),
+    Ng2PaginationModule
+  ],
   declarations: [AttendanceComponent],
   bootstrap: [AttendanceComponent]
 })
