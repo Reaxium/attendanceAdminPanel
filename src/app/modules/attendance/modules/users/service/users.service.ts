@@ -4,8 +4,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
-import {Users} from "../../../../commons/beans/users";
-import {ResponseWithPagination} from "../../../../commons/beans/responseWithPagination";
+import {Users} from "../../../../../commons/beans/users";
+import {ResponseWithPagination} from "../../../../../commons/beans/responseWithPagination";
 import {Observable} from 'rxjs/Observable';
 
 // Observable class extensions

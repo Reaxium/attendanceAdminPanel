@@ -8,8 +8,12 @@
   <tbody
     *ngFor="let row of dataSet | paginate: {id: 'server', itemsPerPage: dataPerPage, currentPage: actualPage, totalItems:totalItems }">
   <tr>
-    <td *ngif="normal" *ngFor="let column of columns">{{row[column.value]}}</td>
-    <td *ngif="actions"></td>
+    <td *ngFor="let column of columns">
+      <div *ngIf="column.dataColumn">{{row[column.value]}}</div>
+      <div *ngIf="column.actionColumn">
+          <a *ngFor="let option of column.options" (click)="optionSelected(option)">{{option.src}}</a>
+      </div>
+    </td>
   </tr>
   </tbody>
 </table>

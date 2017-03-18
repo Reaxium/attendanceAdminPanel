@@ -4,6 +4,8 @@ import {LoginComponent}  from './modules/login/component/login.component';
 import {AppComponent} from './component/app.component';
 import {Routes, RouterModule} from "@angular/router";
 import {LoginModule} from "./modules/login/login.module";
+import {FormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
 const appRoutes: Routes = [
   {
     path: '',
@@ -16,7 +18,12 @@ const appRoutes: Routes = [
   }
 ];
 @NgModule({
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes), LoginModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    RouterModule.forRoot(appRoutes),
+    LoginModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
 })

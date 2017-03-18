@@ -3,7 +3,8 @@
  */
 import {Component, Input} from '@angular/core';
 import {DataTableComponent} from "./datatable.component";
-import {ColumnOptionComponent} from "./columnOption.component";
+import {DataTableOption} from "./option";
+import {onDataTableListener} from "./onDataTableListener";
 @Component({
   selector: 'datatable-column',
   template: "",
@@ -12,15 +13,12 @@ export class ColumnComponent {
 
   @Input() value: String;
   @Input() header: String;
-  @Input() header: String;
-  options: ColumnOptionComponent[];
+  @Input() dataColumn: Boolean;
+  @Input() actionColumn: Boolean;
+  @Input() options: DataTableOption[];
 
   constructor(table: DataTableComponent) {
     table.addColumn(this);
-  }
-
-  addOption(option: ColumnOptionComponent) {
-    this.options.push(option);
   }
 
 }

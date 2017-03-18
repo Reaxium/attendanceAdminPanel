@@ -1,9 +1,6 @@
 /**
  * Created by Eduardo Luttinger on 15/03/2017.
  */
-/**
- * Created by Eduardo Luttinger on 15/03/2017.
- */
 import {Component} from '@angular/core';
 @Component({
   selector: 'my-dashboard',
