@@ -1,0 +1,18 @@
+<input type="text" *ngIf=enableFilter [(ngModel)]=query (keyup)=filter($event) placeholder="Filter"/>
+<table>
+  <thead>
+  <tr>
+    <th *ngFor="let column of columns" (click)="sortByColumn(column.value)">{{column.header}}</th>
+  </tr>
+  </thead>
+  <tbody
+    *ngFor="let row of dataSet | paginate: {id: 'server', itemsPerPage: dataPerPage, currentPage: actualPage, totalItems:totalItems }">
+  <tr>
+    <td *ngif="normal" *ngFor="let column of columns">{{row[column.value]}}</td>
+    <td *ngif="actions"></td>
+  </tr>
+  </tbody>
+</table>
+<div *ngIf=enablePagination>
+  <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+</div>

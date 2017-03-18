@@ -25,18 +25,19 @@
       '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
 
       // other libraries
-      'rxjs':                      'npm:rxjs',
+      'rxjs': 'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-
+      'ng2-pagination':             'https://rawgit.com/michaelbromley/ng2-pagination/master/dist'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       app: {
-       defaultExtension: 'js'
+        defaultExtension: 'js'
       },
       rxjs: {
         defaultExtension: 'js'
       },
+      'ng2-pagination': {main: 'ng2-pagination.js', defaultExtension: 'js'}
     }
   });
 })(this);
