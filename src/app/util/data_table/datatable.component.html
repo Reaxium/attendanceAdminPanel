@@ -11,7 +11,7 @@
     <td *ngFor="let column of columns">
       <div *ngIf="column.dataColumn">{{row[column.value]}}</div>
       <div *ngIf="column.actionColumn">
-          <a *ngFor="let option of column.options" (click)="optionSelected(option)">{{option.src}}</a>
+          <a *ngFor="let option of column.options" (click)="optionSelected(option,row)" title="{{option.title}}"><small><i class="{{option.className}}"></i> </small></a>
       </div>
     </td>
   </tr>

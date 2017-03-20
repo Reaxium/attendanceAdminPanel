@@ -6,5 +6,5 @@ export interface onDataTableListener {
   onDataTableSearch(query: string): void;
   onSortByColumn(columnIdName: String): void;
   onPageChange(page: number): void;
-  onOptionSelected(option:DataTableOption):void;
+  onOptionSelected(option:DataTableOption,dataObject: any):void;
 }

@@ -27,16 +27,20 @@ export class UsersComponent implements onDataTableListener, OnInit {
   actualSort: string = "first_name";
   options: DataTableOption[] = [
     {
-      src: "Opcion 1",
-      className: "",
+      id:"edit",
+      src: "",
+      className: "fa fa-fw fa-pencil",
       type: "",
-      html: ""
+      html: "",
+      title:"Editar"
     },
     {
-      src: "Opcion 2",
-      className: "",
+      id:"delete",
+      src: "",
+      className: "fa fa-fw fa-trash",
       type: "",
-      html: ""
+      html: "",
+      title:"Borrar"
     }
   ];
 
@@ -91,8 +95,17 @@ export class UsersComponent implements onDataTableListener, OnInit {
     this.getUsersObservable();
   }
 
-  onOptionSelected(option: DataTableOption): void {
-      console.log(option.src);
+  onOptionSelected(option: DataTableOption,dataObject: any): void {
+      switch (option.id){
+        case "edit":
+          console.log("Editando usuario: ");
+          console.log(dataObject);
+          break;
+        case "delete":
+          console.log("Borrando usuario: ");
+          console.log(dataObject);
+          break;
+      }
   }
 
 

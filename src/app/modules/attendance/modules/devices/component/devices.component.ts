@@ -23,16 +23,20 @@ export class DevicesComponent implements OnInit, onDataTableListener {
   actualSort: string = "first_name";
   options: DataTableOption[] = [
     {
-      src: "Opcion 1",
-      className: "",
+      id:"",
+      src: "",
+      className: "fa fa-fw fa-pencil",
       type: "",
-      html: ""
+      html: "",
+      title:"Editar"
     },
     {
-      src: "Opcion 2",
-      className: "",
+      id:"",
+      src: "",
+      className: "fa fa-fw fa-trash",
       type: "",
-      html: ""
+      html: "",
+      title:"Borrar"
     }
   ];
 
@@ -57,8 +61,9 @@ export class DevicesComponent implements OnInit, onDataTableListener {
     this.actualPage = page;
   }
 
-  onOptionSelected(option: DataTableOption): void {
-
+  onOptionSelected(option: DataTableOption,dataObject: any): void {
+    console.log(option.src);
+    console.log(dataObject);
   }
 
 }

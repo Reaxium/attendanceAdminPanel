@@ -38,8 +38,8 @@ export class DataTableComponent {
     this.listener.onPageChange(page);
   }
 
-  optionSelected(option: DataTableOption): void {
-    this.listener.onOptionSelected(option);
+  optionSelected(option: DataTableOption, dataObject: any): void {
+    this.listener.onOptionSelected(option,dataObject);
   }
 
 }

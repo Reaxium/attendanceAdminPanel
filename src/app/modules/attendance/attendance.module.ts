@@ -47,7 +47,6 @@ const attendanceRoutes: Routes = [
 @NgModule({
   declarations: [AttendanceComponent],
   imports: [
-    DataTableModule,
     DashboardModule,
     UsersModule,
     DevicesModule,
