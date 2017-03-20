@@ -9,7 +9,7 @@ import {onSpinnerListener} from './onSpinnerListener';
   template:
     `<div class="overlay" *ngIf="loading">
         <div class="centrar">
-          <md-progress-circle [color]="color" [mode]="mode" [value]="mode"></md-progress-circle>
+          <img src="../../../assets/img/loading.gif" class="spinner_img">
         </div>
       </div>`,
   styleUrls:['app/util/spinner_loading/spinner.component.css'],

@@ -3,14 +3,14 @@
  */
 import {Injectable} from '@angular/core';
 import  {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {ResponseReaxium} from '../../../commons/beans/ResponseReaxium';
-
+import {ResponseReaxium} from './responseReaxium';
+import {Constants} from '../../../commons/global/global.constants'
 
 
 @Injectable()
 export class LoginUserService{
 
-  private loginUrl = 'http://localhost:8080/ProyectosGAndG/attendance_cloud/Access/accessUserWebPortal';
+
 
   constructor(private http: Http){}
 
@@ -18,7 +18,7 @@ export class LoginUserService{
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-    return this.http.post(this.loginUrl,JSON.stringify(request),options)
+    return this.http.post(Constants.LOGIN_URL,JSON.stringify(request),options)
       .toPromise()
       .then(response => response.json() as ResponseReaxium)
       .catch(this.handleError)

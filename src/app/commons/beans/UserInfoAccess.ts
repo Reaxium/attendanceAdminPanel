@@ -3,10 +3,16 @@
  */
 
 import {Status} from './Status';
-import {Business} from './Business'
-import {UserType} from './UserType'
+import {Business} from './Business';
+import {UserType} from './UserType';
+import {Menu} from './Menu';
 
-export class User{
+
+export class UserInfoAccess{
+  user : UserInfoAccessBody;
+}
+
+export class UserInfoAccessBody{
 
   user_id: number;
   document_id: string;
@@ -24,5 +30,6 @@ export class User{
   status:Status;
   busines:Business;
   user_type:UserType;
-  stakeholders: any;
+  stakeholders:any[];
+  menu: Menu[];
 }

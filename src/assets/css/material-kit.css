@@ -1749,7 +1749,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
 .input-group .input-group-addon {
   border: 0;
   background: transparent;
-  padding: 12px 15px 0px;
+  /*padding: 12px 15px 0px;*/
 }
 
 .form-group input[type=file] {

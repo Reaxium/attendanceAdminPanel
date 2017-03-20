@@ -22,7 +22,6 @@
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-      '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
 
       // other libraries
       'rxjs': 'npm:rxjs',
@@ -30,6 +29,7 @@
       'ng2-pagination':             'https://rawgit.com/michaelbromley/ng2-pagination/master/dist',
       'moment': 'node_modules/moment/moment.js',
       'ng2-bootstrap/ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
+      'primeng':                   'npm:primeng',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -39,7 +39,8 @@
       rxjs: {
         defaultExtension: 'js'
       },
-      'ng2-pagination': {main: 'ng2-pagination.js', defaultExtension: 'js'}
+      'ng2-pagination': {main: 'ng2-pagination.js', defaultExtension: 'js'},
+      primeng: {defaultExtension: 'js'}
     }
   });
 })(this);

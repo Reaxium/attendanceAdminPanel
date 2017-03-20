@@ -4,9 +4,7 @@
     <div class="header header-filter" style="background: linear-gradient(20deg, rgb(231, 203, 154), rgb(255, 255, 255));  background-size: cover; background-position: top center;">
       <div class="container">
 
-        <div *ngFor="let alert of alerts">
-          <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" dismissible="true">{{ alert.msg }}</alert>
-        </div>
+        <p-growl [value]="msgs" [life]="3000"></p-growl>
         <div class="row">
           <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
             <div class="card card-signup">
@@ -23,24 +21,20 @@
 										<span class="input-group-addon">
 											<i class="material-icons">face</i>
 										</span>
-                    <md-input-container class="field-login-full-width">
-                        <input mdInput [(ngModel)]="userLoginName" placeholder="User Name...">
-                    </md-input-container>
-
+                    <input type="text" pInputText [(ngModel)]="userLoginName" class="field-login-full-width" placeholder="User Name..."/>
                   </div>
 
                   <div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">lock_outline</i>
 										</span>
-                    <md-input-container class="field-login-full-width">
-                      <input mdInput [(ngModel)]="userPassword"  placeholder="Password..." />
-                    </md-input-container>
+                    <input type="password" pInputText  [(ngModel)]="userPassword" class="field-login-full-width" placeholder="Password..."/>
                   </div>
 
                   <div class="checkbox">
                     <label>
-                      <md-checkbox>Remember Password</md-checkbox>
+                     <!-- <md-checkbox>Remember Password</md-checkbox>-->
+                      <p-checkbox [(ngModel)]="checked" binary="true" label="Remember Password"></p-checkbox>
                     </label>
                   </div>
                 </div>
