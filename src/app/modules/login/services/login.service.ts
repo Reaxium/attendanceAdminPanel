@@ -3,10 +3,7 @@
  */
 import {Injectable} from '@angular/core';
 import  {Http, Response, Headers, RequestOptions} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import {ResponseReaxium} from '../objects/ResponseReaxium';
+import {ResponseReaxium} from '../../../commons/beans/ResponseReaxium';
 
 
 
@@ -17,22 +14,18 @@ export class LoginUserService{
 
   constructor(private http: Http){}
 
-  getAccessUsers(request:any) : Observable<ResponseReaxium>{
+  getAccessUsers(request:any) : Promise<ResponseReaxium>{
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
-    return this.http.post(this.loginUrl,JSON.stringify(request),options)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    console.log(body);
-    return body.data || { };
+    return this.http.post(this.loginUrl,JSON.stringify(request),options)
+      .toPromise()
+      .then(response => response.json() as ResponseReaxium)
+      .catch(this.handleError)
   }
 
   private handleError(error: Response | any){
-    console.error('error');
-    return Observable.throw("Error");
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
   }
 }

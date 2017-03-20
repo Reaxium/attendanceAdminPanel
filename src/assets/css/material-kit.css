@@ -2336,7 +2336,7 @@ legend {
     padding-bottom: 15px;
   }
 }
-.navbar .alert {
+/*.navbar .alert {
   border-radius: 0;
   left: 0;
   position: absolute;
@@ -2345,7 +2345,7 @@ legend {
   width: 100%;
   z-index: 3;
   transition: all 0.3s;
-}
+}*/
 
 .dropdown-menu {
   border: 0;
@@ -2434,7 +2434,7 @@ legend {
   color: #f44336;
 }
 
-.alert {
+/*.alert {
   border: 0;
   border-radius: 0;
   padding: 20px 15px;
@@ -2509,7 +2509,7 @@ legend {
   margin-top: -7px;
   top: 5px;
   position: relative;
-}
+}*/
 
 .progress {
   height: 4px;

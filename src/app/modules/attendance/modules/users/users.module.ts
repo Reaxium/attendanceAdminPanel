@@ -12,7 +12,8 @@ import {Ng2PaginationModule} from "ng2-pagination";
 import {UsersService} from "./users.service";
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule, Ng2PaginationModule],
-  declarations: [UsersComponent, DataTableComponent, ColumnComponent],
+  //declarations: [UsersComponent, DataTableComponent, ColumnComponent],
+  declarations: [UsersComponent],
   bootstrap: [UsersComponent],
   providers: [UsersService],
 })

@@ -1,7 +1,7 @@
 /**
  * Created by VladimirIlich on 17/3/2017.
  */
-import {} from '../objects/BusinessType';
+import {} from './BusinessType';
 import {BusinessType} from "./BusinessType";
 
 export class Business{
