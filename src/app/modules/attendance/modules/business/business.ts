@@ -1,11 +1,15 @@
+import { BusinessType } from "./businessType";
+import { BusinessStatus } from "./businessStatus";
+
 export class Business {
+  business_id: number;
+  business_name: string;
+  business_id_number: number;
+  status_id: number;
+  business_type_id: number;
+  business_logo: string;
+  business_type: BusinessType;
+  status: BusinessStatus;
 
-
-  constructor(public name:string,
-              public dni:string,
-              public type:string
-             ) {}
 }
-/**
- * Created by eduardo on 3/16/2017.
- */
+

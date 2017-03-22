@@ -19,6 +19,8 @@ export class UsersService {
    * Obtiene los usuarios de sistema
    * @returns {Promise<TResult|T>}
    */
+
+
   getUsers(parameters: any): Promise<ResponseWithPagination> {
     return this.http.post(this.usersApiURL, JSON.stringify(parameters), this.headers)
       .toPromise()
