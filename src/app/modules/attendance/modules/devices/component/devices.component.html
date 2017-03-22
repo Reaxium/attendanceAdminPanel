@@ -1,0 +1,13 @@
+<t4ss-data-table [dataSet]=devices
+                 [listener]=component
+                 [enableFilter]="true"
+                 [enablePagination]="true"
+                 [actualPage]=actualPage
+                 [totalItems]=totalItems
+                 [dataPerPage]=dataPerPage>
+  <datatable-column [dataColumn]=true [value]="'device_name'" [header]="'Device Name'"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'device_description'" [header]="'Device Description'"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'device_serial'" [header]="'Device Serial'"></datatable-column>
+  <datatable-column [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
+</t4ss-data-table>
+

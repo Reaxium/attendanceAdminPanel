@@ -3,11 +3,11 @@
  */
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {Routes, RouterModule} from "@angular/router";
-import {DevicesComponent} from "./devices.component";
+import {DevicesComponent} from "./component/devices.component";
+import {DataTableModule} from "../../../../util/data_table/datatable.module";
 
 @NgModule({
-  imports: [BrowserModule],
+  imports: [BrowserModule,DataTableModule],
   declarations: [DevicesComponent],
   bootstrap: [DevicesComponent]
 })

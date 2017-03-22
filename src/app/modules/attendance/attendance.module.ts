@@ -2,20 +2,16 @@
  * Created by Eduardo Luttinger on 15/03/2017.
  */
 import {NgModule}      from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 import {AttendanceComponent} from './component/attendance.component';
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import {Routes, RouterModule} from "@angular/router";
 import {DashboardComponent} from "./modules/dashboard/dashboard.component";
 import {UsersModule} from "./modules/users/users.module";
-import {UsersComponent} from "./modules/users/users.component";
+import {UsersComponent} from "./modules/users/component/users.component";
 import {DevicesModule} from "./modules/devices/devices.module";
-import {DevicesComponent} from "./modules/devices/devices.component";
+import {DevicesComponent} from "./modules/devices/component/devices.component";
 import {BusinessComponent} from "./modules/business/business.component";
 import {BusinessModule} from "./modules/business/business.module";
-import {Ng2PaginationModule} from "ng2-pagination";
-import {DataTableComponent} from "../../util/data_table/datatable.component";
-import {ColumnComponent} from "../../util/data_table/column.component";
 import {DataTableModule} from "../../util/data_table/datatable.module";
 
 const attendanceRoutes: Routes = [
@@ -49,17 +45,14 @@ const attendanceRoutes: Routes = [
 
 ];
 @NgModule({
+  declarations: [AttendanceComponent],
   imports: [
-    BrowserModule,
     DashboardModule,
     UsersModule,
     DevicesModule,
     BusinessModule,
     RouterModule.forRoot(attendanceRoutes),
-    Ng2PaginationModule,
-    DataTableModule
   ],
-  declarations: [AttendanceComponent],
   bootstrap: [AttendanceComponent]
 })
 export class AttendanceModule {

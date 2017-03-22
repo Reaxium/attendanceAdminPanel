@@ -2,18 +2,21 @@
  * Created by Eduardo Luttinger on 15/03/2017.
  */
 import {Component, OnInit} from '@angular/core';
-import {UsersService} from "../users/users.service"
-import {Users} from "../../../../commons/beans/users";
-import {onDataTableListener} from "../../../../util/data_table/onDataTableListener";
+import {UsersService} from "../service/users.service"
+import {Users} from "../../../../../commons/beans/users";
+
+import {onDataTableListener} from "../../../../../util/data_table/onDataTableListener";
 import {Http} from "@angular/http";
+import {DataTableOption} from "../../../../../util/data_table/option";
 
 @Component({
   selector: 'users-component',
-  templateUrl: "./app/modules/attendance/modules/users/users.component.html",
-  styleUrls: ["app/modules/attendance/modules/users/users.component.css"],
+  templateUrl: "./app/modules/attendance/modules/users/component/users.component.html",
+  styleUrls: ["app/modules/attendance/modules/users/component/users.component.css"],
   providers: [UsersService]
 })
 export class UsersComponent implements onDataTableListener, OnInit {
+
 
   users: Users[];
   component: UsersComponent = this;
@@ -22,16 +25,30 @@ export class UsersComponent implements onDataTableListener, OnInit {
   dataPerPage: number = 5;
   actualQuery: string = "";
   actualSort: string = "first_name";
+  options: DataTableOption[] = [
+    {
+      id:"edit",
+      src: "",
+      className: "fa fa-fw fa-pencil",
+      type: "",
+      html: "",
+      title:"Editar"
+    },
+    {
+      id:"delete",
+      src: "",
+      className: "fa fa-fw fa-trash",
+      type: "",
+      html: "",
+      title:"Borrar"
+    }
+  ];
 
   constructor(private usersService: UsersService, private http: Http) {
   }
 
   ngOnInit(): void {
-    this.getUsers();
-  }
-
-  getUsersSimulation(): Promise<Users[]> {
-    return this.http.get("/app/data/users.json").toPromise().then(response => this.users = response.json() as Users[]);
+    this.getUsersObservable();
   }
 
   getUsers(): void {
@@ -60,23 +77,37 @@ export class UsersComponent implements onDataTableListener, OnInit {
   onDataTableSearch(query: string): void {
     if (query == "") {
       this.actualQuery = "";
-      this.getUsers();
+      this.getUsersObservable();
     } else if (query.length > 3) {
       this.actualQuery = query;
-      this.getUsers();
+      this.getUsersObservable();
     }
   }
 
   onSortByColumn(columnName: string): void {
     this.actualSort = columnName;
-    this.getUsers();
+    this.getUsersObservable();
   }
 
 
   onPageChange(page: number): void {
     this.actualPage = page;
-    this.getUsers();
+    this.getUsersObservable();
   }
+
+  onOptionSelected(option: DataTableOption,dataObject: any): void {
+      switch (option.id){
+        case "edit":
+          console.log("Editando usuario: ");
+          console.log(dataObject);
+          break;
+        case "delete":
+          console.log("Borrando usuario: ");
+          console.log(dataObject);
+          break;
+      }
+  }
+
 
   getUsersObservable(): void {
     var parameters = {

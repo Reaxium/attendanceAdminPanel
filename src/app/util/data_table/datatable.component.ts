@@ -4,6 +4,7 @@
 import {Component, Input} from '@angular/core';
 import {ColumnComponent} from "./column.component";
 import {onDataTableListener} from "./onDataTableListener";
+import {DataTableOption} from "./option";
 
 @Component({
   selector: 't4ss-data-table',
@@ -35,6 +36,10 @@ export class DataTableComponent {
 
   getPage(page: number) {
     this.listener.onPageChange(page);
+  }
+
+  optionSelected(option: DataTableOption, dataObject: any): void {
+    this.listener.onOptionSelected(option,dataObject);
   }
 
 }
