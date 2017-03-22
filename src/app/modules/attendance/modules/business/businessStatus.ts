@@ -1,5 +1,5 @@
 /**
- * Created by andrebella on 3/17/2017.
+ * Created by andreina on 3/17/2017.
  */
 export class BusinessStatus {
 

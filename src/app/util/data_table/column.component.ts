@@ -12,7 +12,6 @@ export class ColumnComponent {
 
   @Input() value: String;
   @Input() header: String;
-  @Input() header: String;
   options: ColumnOptionComponent[];
 
   constructor(table: DataTableComponent) {

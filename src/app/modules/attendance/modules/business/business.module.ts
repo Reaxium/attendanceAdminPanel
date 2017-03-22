@@ -11,7 +11,7 @@ import {ColumnComponent} from "../../../../util/data_table/column.component";
 import {DataTableModule} from "../../../../util/data_table/datatable.module";
 
 @NgModule({
-  imports: [BrowserModule,FormsModule,MaterialModule,DataTableModule],
+  imports: [BrowserModule,FormsModule,MaterialModule],
   declarations: [BusinessComponent],
   bootstrap: [BusinessComponent]
 })

@@ -13,7 +13,7 @@ import {ColumnComponent} from "../../../../util/data_table/column.component";
 import {DataTableModule} from "../../../../util/data_table/datatable.module";
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpModule, Ng2PaginationModule,DataTableModule],
+  imports: [BrowserModule, FormsModule, HttpModule, Ng2PaginationModule],
   declarations: [UsersComponent],
   bootstrap: [UsersComponent],
   providers: [UsersService],
