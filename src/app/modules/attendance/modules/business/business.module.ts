@@ -6,14 +6,15 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BusinessComponent} from "./business.component";
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
-import {DataTableComponent} from "../../../../util/data_table/datatable.component";
-import {ColumnComponent} from "../../../../util/data_table/column.component";
-import {DataTableModule} from "../../../../util/data_table/datatable.module";
+import { DataTableModule } from "../../../../util/data_table/datatable.module";
+import {BusinessService} from "./business.service";
+
 
 @NgModule({
-  imports: [BrowserModule,FormsModule,MaterialModule],
+  imports: [BrowserModule,FormsModule,MaterialModule,DataTableModule],
   declarations: [BusinessComponent],
-  bootstrap: [BusinessComponent]
+  bootstrap: [BusinessComponent],
+  providers: [BusinessService],
 })
 
 export class BusinessModule {
