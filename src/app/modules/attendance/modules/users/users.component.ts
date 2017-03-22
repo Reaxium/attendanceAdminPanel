@@ -3,8 +3,10 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../users/users.service"
-import {Users} from "./users";
+import {Users} from "../../../../commons/beans/users";
 import {onDataTableListener} from "../../../../util/data_table/onDataTableListener";
+import {Http} from "@angular/http";
+
 @Component({
   selector: 'users-component',
   templateUrl: "./app/modules/attendance/modules/users/users.component.html",
@@ -21,11 +23,15 @@ export class UsersComponent implements onDataTableListener, OnInit {
   actualQuery: string = "";
   actualSort: string = "first_name";
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, private http: Http) {
   }
 
   ngOnInit(): void {
     this.getUsers();
+  }
+
+  getUsersSimulation(): Promise<Users[]> {
+    return this.http.get("/app/data/users.json").toPromise().then(response => this.users = response.json() as Users[]);
   }
 
   getUsers(): void {
@@ -40,22 +46,23 @@ export class UsersComponent implements onDataTableListener, OnInit {
         }
       }
     };
+
     this.usersService.getUsers(parameters).then(response => {
-      if(response.ReaxiumResponse.code == 0){
+      if (response.ReaxiumResponse.code == 0) {
         this.totalItems = response.ReaxiumResponse.object.totalRecords;
         this.users = response.ReaxiumResponse.object.data;
-      }else{
+      } else {
         this.users = [];
       }
     });
   }
 
   onDataTableSearch(query: string): void {
-    if(query.length > 3){
-      this.actualQuery = query;
-      this.getUsers();
-    }else if (this.actualQuery == ""){
+    if (query == "") {
       this.actualQuery = "";
+      this.getUsers();
+    } else if (query.length > 3) {
+      this.actualQuery = query;
       this.getUsers();
     }
   }
@@ -69,6 +76,28 @@ export class UsersComponent implements onDataTableListener, OnInit {
   onPageChange(page: number): void {
     this.actualPage = page;
     this.getUsers();
+  }
+
+  getUsersObservable(): void {
+    var parameters = {
+      ReaxiumParameters: {
+        Users: {
+          business_id: 1,
+          filter: this.actualQuery,
+          page: this.actualPage,
+          sort: this.actualSort,
+          limit: this.dataPerPage
+        }
+      }
+    };
+    this.usersService.getUsersObservable(parameters).subscribe(response => {
+      if (response.ReaxiumResponse.code == 0) {
+        this.totalItems = response.ReaxiumResponse.object.totalRecords;
+        this.users = response.ReaxiumResponse.object.data;
+      } else {
+        this.users = [];
+      }
+    });
   }
 
 }
