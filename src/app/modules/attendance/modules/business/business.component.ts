@@ -54,11 +54,8 @@ export class BusinessComponent implements onDataTableListener,OnInit {
       var parameters = {
         ReaxiumParameters: {
           Business: {
-            business_id: 1,
-            filter: this.actualQuery,
-            page: this.actualPage,
-            sort: this.actualSort,
-            limit: this.dataPerPage
+            filter: "",
+            business_master_id:"1"
           }
         }
       };
@@ -72,12 +69,20 @@ export class BusinessComponent implements onDataTableListener,OnInit {
     });
   }
 
+/*
+  business_id: 1,
+  filter: this.actualQuery,
+  page: this.actualPage,
+  sort: this.actualSort,
+  limit: this.dataPerPage*/
+
+
   getBusinessObservable(): void {
     var parameters = {
       ReaxiumParameters: {
         Business: {
-          business_id: 1,
           filter: this.actualQuery,
+          business_id:1,
           page: this.actualPage,
           sort: this.actualSort,
           limit: this.dataPerPage

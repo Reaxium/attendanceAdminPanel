@@ -119,7 +119,7 @@ export class UsersComponent implements onDataTableListener, OnInit {
           sort: this.actualSort,
           limit: this.dataPerPage
         }
-      }
+    }
     };
     this.usersService.getUsersObservable(parameters).subscribe(response => {
       if (response.ReaxiumResponse.code == 0) {
