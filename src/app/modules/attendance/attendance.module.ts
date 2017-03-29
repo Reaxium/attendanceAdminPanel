@@ -13,6 +13,7 @@ import {DevicesComponent} from "./modules/devices/component/devices.component";
 import {BusinessComponent} from "./modules/business/business.component";
 import {BusinessModule} from "./modules/business/business.module";
 import {DataTableModule} from "../../util/data_table/datatable.module";
+import {BUSINESS_ROUTES} from "./modules/business/business.routes";
 
 const attendanceRoutes: Routes = [
   {
@@ -38,7 +39,8 @@ const attendanceRoutes: Routes = [
       },
       {
         path: "business",
-        component: BusinessComponent
+        component: BusinessComponent,
+        children: BUSINESS_ROUTES
       }
     ]
   },

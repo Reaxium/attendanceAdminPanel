@@ -1,15 +1,7 @@
-<t4ss-data-table [dataSet]=business
-                 [listener]=component
-                 [enableFilter]="true"
-                 [enablePagination]="true"
-                 [actualPage]=actualPage
-                 [totalItems]=totalItems
-                 [dataPerPage]=dataPerPage>
-  <datatable-column [dataColumn]=true [value]="'business_id'" [header]="'Business ID'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'business_name'" [header]="'Business Name'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'business_id_number'" [header]="'Business ID number'"></datatable-column>
-  <datatable-column [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
-</t4ss-data-table>
-
+<div class="row">
+  <div class="col-md-5">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 
 

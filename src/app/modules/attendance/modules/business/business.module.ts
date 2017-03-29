@@ -4,15 +4,29 @@
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BusinessComponent} from "./business.component";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { DataTableModule } from "../../../../util/data_table/datatable.module";
 import {BusinessService} from "./business.service";
+import {BUSINESS_ROUTES} from "./business.routes";
+import { RouterModule, Routes } from '@angular/router';
+import { EditBusinessComponent } from "./edit-business/editBusiness.component";
+import { TableBusinessComponent } from "./table-business/tableBusiness.component";
 
 
 @NgModule({
-  imports: [BrowserModule,FormsModule,MaterialModule,DataTableModule],
-  declarations: [BusinessComponent],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    DataTableModule,
+    RouterModule.forRoot(BUSINESS_ROUTES)],
+  declarations: [
+    BusinessComponent,
+    EditBusinessComponent,
+    TableBusinessComponent
+    ],
   bootstrap: [BusinessComponent],
   providers: [BusinessService],
 })

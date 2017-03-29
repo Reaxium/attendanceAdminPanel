@@ -1,3 +1,13 @@
 /**
- * Created by eduardo on 3/15/2017.
+ * Created by Andreina on 3/15/2017.
  */
+import { RouterModule, Routes } from "@angular/router";
+import { EditBusinessComponent } from "./edit-business/editBusiness.component";
+import { TableBusinessComponent } from "./table-business/tableBusiness.component";
+
+export const BUSINESS_ROUTES: Routes = [
+  //{ path: '', component: TableBusinessComponent},
+  //{ path: '', component: TableBusinessComponent},
+  { path: 'table', component: TableBusinessComponent},
+  { path: 'table/newBusiness', component: EditBusinessComponent}
+];
