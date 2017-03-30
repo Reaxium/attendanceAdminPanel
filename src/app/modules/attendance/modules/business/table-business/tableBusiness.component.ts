@@ -19,6 +19,8 @@ import { BUSINESS_ROUTES } from "../business.routes";
 })
 
 export class TableBusinessComponent implements onDataTableListener,OnInit {
+
+  master: boolean;
   business: Business[];
   component: TableBusinessComponent = this;
   actualPage: number = 1;
@@ -96,18 +98,24 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
     this.getBusinessObservable();
   }
 
+  deleteBusiness(business: Business){
+    this.businessService.deleteBusiness(business).subscribe(
+      data => console.log(data),
+      error => console.error
+    );
+  }
+
   onOptionSelected(option: DataTableOption,dataObject: any): void {
     switch (option.id){
       case "edit":
         console.log("Editando business: ");
         console.log(dataObject);
-        this.businessService.findBusinessID(option.id,dataObject.business_id);
-        this.businessService.addBusiness(dataObject);
-        this.router.navigate(['attendance/business/table/newBusiness']);
+        this.router.navigate(['attendance/business/table/newBusiness', dataObject]);
         break;
       case "delete":
         console.log("Borrando business: ");
         console.log(dataObject);
+        this.deleteBusiness(dataObject);
         break;
     }
   }

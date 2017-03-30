@@ -3,6 +3,8 @@
  */
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {Users} from "../../../commons/beans/users";
+
 @Component({
   selector: 'my-login',
   templateUrl: "./app/modules/login/component/login.component.html",
@@ -14,6 +16,7 @@ export class LoginComponent {
 
   constructor(private router: Router) {
   }
+
 
   validateLogin(): void {
     this.router.navigate(['/app']);

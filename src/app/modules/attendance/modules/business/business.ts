@@ -2,7 +2,7 @@ import { BusinessType } from "./businessType";
 import { BusinessStatus } from "./businessStatus";
 
 export class Business {
-  business_id: number;
+  business_id: string;
   business_name: string;
   business_id_number: string;
   status_id: string;

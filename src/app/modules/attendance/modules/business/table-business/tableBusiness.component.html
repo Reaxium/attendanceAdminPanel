@@ -1,5 +1,5 @@
 <div>
-  <button class="btn btn-" style="margin: -5px 400px" [routerLink]="['newBusiness']">+</button> <!-- [routerLink]="['new']" -->
+  <button *ngIf="master" class="btn btn-" style="margin: -5px 400px" [routerLink]="['newBusiness']">+</button> <!-- [routerLink]="['new']" -->
 </div>
 <t4ss-data-table [dataSet]=business
                  [listener]=component
@@ -11,6 +11,6 @@
   <datatable-column [dataColumn]=true [value]="'business_id'" [header]="'Business ID'"></datatable-column>
   <datatable-column [dataColumn]=true [value]="'business_name'" [header]="'Business Name'"></datatable-column>
   <datatable-column [dataColumn]=true [value]="'business_id_number'" [header]="'Business ID number'"></datatable-column>
-  <datatable-column [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
+  <datatable-column *ngIf="master" [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
 </t4ss-data-table>
 
