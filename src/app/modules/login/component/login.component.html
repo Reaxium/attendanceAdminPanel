@@ -1,11 +1,13 @@
+<my-spinner [loading]="loading"></my-spinner>
 <div class="signup-page">
   <div class="wrapper">
     <div class="header header-filter" style="background: linear-gradient(20deg, rgb(231, 203, 154), rgb(255, 255, 255));  background-size: cover; background-position: top center;">
       <div class="container">
+
+        <p-growl [value]="msgs" [life]="3000"></p-growl>
         <div class="row">
           <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
             <div class="card card-signup">
-              <form class="form" method="" action="">
                 <div class="header header-primary text-center">
                   <h4>Log In</h4>
                   <div class="social-line">
@@ -19,20 +21,20 @@
 										<span class="input-group-addon">
 											<i class="material-icons">face</i>
 										</span>
-                    <input type="text" class="form-control" placeholder="User Name...">
+                    <input type="text" pInputText [(ngModel)]="userLoginName" class="field-login-full-width" placeholder="User Name..."/>
                   </div>
 
                   <div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">lock_outline</i>
 										</span>
-                    <input type="password" placeholder="Password..." class="form-control" />
+                    <input type="password" pInputText  [(ngModel)]="userPassword" class="field-login-full-width" placeholder="Password..."/>
                   </div>
 
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="optionsCheckboxes" checked>
-                      Remember Password
+                     <!-- <md-checkbox>Remember Password</md-checkbox>-->
+                      <p-checkbox [(ngModel)]="checked" binary="true" label="Remember Password"></p-checkbox>
                     </label>
                   </div>
                 </div>
@@ -43,15 +45,13 @@
                 <div class="footer text-center">
                   <a href="#pablo" class="btn btn-simple btn-danger btn-md">Forget Password?</a>
                 </div>
-              </form>
+
             </div>
           </div>
         </div>
       </div>
-
       <footer class="footer">
         <div class="container">
-
           <div class="copyright text-center">
             &copy; Copyright 2016-2017 Reaxium Development Team. All rights reserved.
           </div>
