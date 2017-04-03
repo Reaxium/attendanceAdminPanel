@@ -20,7 +20,8 @@ import { BUSINESS_ROUTES } from "../business.routes";
 
 export class TableBusinessComponent implements onDataTableListener,OnInit {
 
-  master: boolean;
+  master = true;//boolean;
+  userID = true;
   business: Business[];
   component: TableBusinessComponent = this;
   actualPage: number = 1;
@@ -53,7 +54,6 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
   ngOnInit(): void {
     this.getBusinessObservable();
   }
-
 
   getBusinessObservable(): void {
     var parameters = {
@@ -110,7 +110,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       case "edit":
         console.log("Editando business: ");
         console.log(dataObject);
-        this.router.navigate(['attendance/business/table/newBusiness', dataObject]);
+        this.router.navigate(['attendance/business/table/newBusiness', dataObject, this.userID]);
         break;
       case "delete":
         console.log("Borrando business: ");

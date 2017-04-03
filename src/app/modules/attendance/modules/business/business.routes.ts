@@ -6,8 +6,6 @@ import { EditBusinessComponent } from "./edit-business/editBusiness.component";
 import { TableBusinessComponent } from "./table-business/tableBusiness.component";
 
 export const BUSINESS_ROUTES: Routes = [
-  //{ path: '', component: TableBusinessComponent},
-  //{ path: '', component: TableBusinessComponent},
   { path: 'table', component: TableBusinessComponent},
-  { path: 'table/newBusiness', component: EditBusinessComponent}
+  { path: 'table/newBusiness/&:dataObject/&:userID2',component: EditBusinessComponent}
 ];

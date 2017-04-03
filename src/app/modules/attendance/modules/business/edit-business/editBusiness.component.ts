@@ -28,8 +28,11 @@ export class EditBusinessComponent implements OnInit{//, OnDestroy {
 
   ngOnInit() {
         this.route.params.subscribe(
-          (params : any) => {
-            this.initForm(params);
+          (params: any) => {
+            console.log('params=', params);
+            console.log('params1=', params.dataObject);
+            console.log('params2=', params.userID2);
+            this.initForm(params.dataObject);
           }
         );
 
@@ -37,7 +40,7 @@ export class EditBusinessComponent implements OnInit{//, OnDestroy {
 
   onSubmit(){
     const newBusiness = this.businessForm.value;
-    this.storeBusiness(newBusiness);
+    this.storeOrEditBusiness(newBusiness);
     this.onCancel();
   }
 
@@ -60,8 +63,8 @@ export class EditBusinessComponent implements OnInit{//, OnDestroy {
       });
     }
 
-  storeBusiness(business: Business){
-    this.businessService.storeBusiness(business).subscribe(
+  storeOrEditBusiness(business: Business){
+    this.businessService.storeOrEditBusiness(business).subscribe(
       data => console.log(data),
       error => console.error
     );

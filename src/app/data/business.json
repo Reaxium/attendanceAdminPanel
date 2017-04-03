@@ -1,0 +1,60 @@
+{
+  "ReaxiumResponse": {
+    "code": 0,
+    "message": "SUCCESSFUL REQUEST",
+    "object": {
+      "totalRecords": 4,
+      "totalPages": 1,
+      "data": [
+        {
+          "business_id": 6,
+          "business_name": "USB",
+          "business_id_number": "84730373",
+          "status_id": 1,
+          "business_type_id": 2,
+          "business_logo": "http://54.191.137.124/reaxium_user_images/btmcssh45.jpg",
+          "business_type": {
+            "business_type_id": 2,
+            "business_type_name": "Owner"
+          },
+          "status": {
+            "status_id": 1,
+            "status_name": "ACTIVE"
+          }
+        },
+        {
+          "business_id": 4,
+          "business_name": "Universidad Naples",
+          "business_id_number": "4",
+          "status_id": 1,
+          "business_type_id": 1,
+          "business_logo": null,
+          "business_type": {
+            "business_type_id": 1,
+            "business_type_name": "Worker"
+          },
+          "status": {
+            "status_id": 1,
+            "status_name": "ACTIVE"
+          }
+        },
+        {
+          "business_id": 31,
+          "business_name": "Unidad Educativa los Castores",
+          "business_id_number": "536444",
+          "status_id": 1,
+          "business_type_id": 1,
+          "business_logo": "http://54.191.137.124/reaxium_user_images/profile-default.png",
+          "business_type": {
+            "business_type_id": 1,
+            "business_type_name": "Worker"
+          },
+          "status": {
+            "status_id": 1,
+            "status_name": "ACTIVE"
+          }
+        }
+      ]
+    }
+  }
+}
