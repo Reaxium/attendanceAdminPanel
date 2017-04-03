@@ -7,6 +7,9 @@ import { Subscription } from "rxjs/Rx";
 import { FormArray, FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Business } from "../business";
 import { BusinessService } from "../business.service";
+import { Message } from 'primeng/primeng';
+import {ResponseReaxium} from "../../../../login/services/responseReaxium";
+import {Constants} from "../../../../../commons/global/global.constants";
 
 
 @Component({
@@ -16,6 +19,7 @@ import { BusinessService } from "../business.service";
 })
 export class EditBusinessComponent implements OnInit{//, OnDestroy {
   businessForm: FormGroup;
+  msgs: Message[] = [];
 
   private business: Business;
 
@@ -29,10 +33,7 @@ export class EditBusinessComponent implements OnInit{//, OnDestroy {
   ngOnInit() {
         this.route.params.subscribe(
           (params: any) => {
-            console.log('params=', params);
-            console.log('params1=', params.dataObject);
-            console.log('params2=', params.userID2);
-            this.initForm(params.dataObject);
+            this.initForm(params);
           }
         );
 
@@ -40,8 +41,12 @@ export class EditBusinessComponent implements OnInit{//, OnDestroy {
 
   onSubmit(){
     const newBusiness = this.businessForm.value;
-    this.storeOrEditBusiness(newBusiness);
-    this.onCancel();
+    const userInformation = sessionStorage.getItem('userInformation');
+    console.log('userInformation=', JSON.parse(userInformation));
+    const userID = JSON.parse(userInformation).userId;
+    console.log('userId=', userID);
+    this.storeOrEditBusiness(newBusiness,userID);
+    //this.onCancel();
   }
 
   onCancel(){
@@ -63,10 +68,30 @@ export class EditBusinessComponent implements OnInit{//, OnDestroy {
       });
     }
 
-  storeOrEditBusiness(business: Business){
-    this.businessService.storeOrEditBusiness(business).subscribe(
+  /*storeOrEditBusiness(business: Business, userID: string){
+    this.businessService.storeOrEditBusiness(business,userID).subscribe(
       data => console.log(data),
-      error => console.error
+      error => console.error  //(ResponseReaxium => this.getHandlerResponse(ResponseReaxium))
     );
+  }*/
+
+  storeOrEditBusiness(business: Business, userID: string){
+    this.businessService.storeOrEditBusiness(business,userID).subscribe(
+      //data => console.log(data),
+      ResponseReaxium => this.getHandlerResponse(ResponseReaxium));
   }
+
+  getHandlerResponse(response:ResponseReaxium): void {
+    if(response.ReaxiumResponse.code != Constants.SUCCESSFUL_RESPONSE_CODE){
+      console.log("Error servicio: "+ response.ReaxiumResponse.message);
+      this.msgs.push({
+        severity:'warn',
+        summary:'Invalidated User',
+        detail:'The user is not master and it has to for create o update.'
+      });
+    }else if(response.ReaxiumResponse.code == Constants.SUCCESSFUL_RESPONSE_CODE){
+      this.onCancel();
+    }
+  }
+
 }

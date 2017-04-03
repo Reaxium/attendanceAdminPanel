@@ -18,6 +18,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import {ResponseReaxium} from "../../../login/services/responseReaxium";
 
 @Injectable()
 export class BusinessService {
@@ -55,24 +56,25 @@ export class BusinessService {
   }
 
 
-  storeOrEditBusiness(business: Business){
-    var parameters = {
-      ReaxiumParameters: {
-        Business: {
-          business_id: business.business_id,
-          business_name: business.business_name,
-          business_id_number: business.business_id_number,
-          status_id: business.status_id,
-          business_type_id: business.business_type_id
+  storeOrEditBusiness(business: Business, userID: string){
+      var parameters = {
+        ReaxiumParameters: {
+          Business: {
+            business_id: business.business_id,
+            business_name: business.business_name,
+            business_id_number: business.business_id_number,
+            status_id: business.status_id,
+            business_type_id: business.business_type_id,
+            userIdInSession: userID
+          }
         }
-      }
-    };
-    return this.http.post(this.businessStoreApiURL, JSON.stringify(parameters), this.headers)
-    .map(response => response.json())
-    .catch(this.handleErrorObservable);
+      };
+      return this.http.post(this.businessStoreApiURL, JSON.stringify(parameters), this.headers)
+      .map(response => response.json() as ResponseReaxium)
+      .catch(this.handleErrorObservable);
   }
 
-  deleteBusiness(business: Business){
+  deleteBusiness(business: Business, userID: string){
     var parameters = {
       ReaxiumParameters: {
         Business: {
@@ -80,12 +82,13 @@ export class BusinessService {
           business_name: business.business_name,
           business_id_number: business.business_id_number,
           status_id: business.status_id,
-          business_type_id: business.business_type_id
+          business_type_id: business.business_type_id,
+          userIdInSession: userID
         }
       }
     };
     return this.http.post(this.businessDeleteApiURL, JSON.stringify(parameters), this.headers)
-      .map(response => response.json())
+      .map(response => response.json() as ResponseReaxium)
       .catch(this.handleErrorObservable);
   }
 

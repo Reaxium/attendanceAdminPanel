@@ -6,5 +6,5 @@ export class Constants{
   static SUCCESSFUL_RESPONSE_CODE = 0;
 
   //urls
-  static LOGIN_URL = 'http://localhost:8080/ProyectosGAndG/attendance_cloud/Access/accessUserWebPortal';
+  static LOGIN_URL = 'http://localhost/attendance_cloud/Access/accessUserWebPortal';
 }

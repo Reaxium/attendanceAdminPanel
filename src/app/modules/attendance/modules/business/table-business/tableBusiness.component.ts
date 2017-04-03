@@ -11,6 +11,9 @@ import {onDataTableListener } from "../../../../../util/data_table/onDataTableLi
 import { DataTableOption } from "../../../../../util/data_table/option";
 import { Http } from "@angular/http";
 import { BUSINESS_ROUTES } from "../business.routes";
+import {ResponseReaxium} from "../../../../login/services/responseReaxium";
+import {Constants} from "../../../../../commons/global/global.constants";
+import { Message } from 'primeng/primeng';
 
 @Component({
   selector: 'tableBusiness-component',
@@ -20,8 +23,9 @@ import { BUSINESS_ROUTES } from "../business.routes";
 
 export class TableBusinessComponent implements onDataTableListener,OnInit {
 
-  master = true;//boolean;
-  userID = true;
+  master : boolean; //== true;//
+  userId : string;
+  msgs2: Message[] = [];
   business: Business[];
   component: TableBusinessComponent = this;
   actualPage: number = 1;
@@ -53,6 +57,10 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
 
   ngOnInit(): void {
     this.getBusinessObservable();
+    const userInformation = sessionStorage.getItem('userInformation');
+    const userTypeId = JSON.parse(userInformation).businessTypeId;
+    this.master = userTypeId==3 ? true : false;
+    this.userId = JSON.parse(userInformation).userId;
   }
 
   getBusinessObservable(): void {
@@ -99,9 +107,10 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
   }
 
   deleteBusiness(business: Business){
-    this.businessService.deleteBusiness(business).subscribe(
-      data => console.log(data),
-      error => console.error
+    this.businessService.deleteBusiness(business,this.userId).subscribe(
+      //data => console.log(data),
+      //error => console.error
+      ResponseReaxium => this.getHandlerResponse(ResponseReaxium)
     );
   }
 
@@ -110,7 +119,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       case "edit":
         console.log("Editando business: ");
         console.log(dataObject);
-        this.router.navigate(['attendance/business/table/newBusiness', dataObject, this.userID]);
+        this.router.navigate(['attendance/business/table/newBusiness', dataObject]);
         break;
       case "delete":
         console.log("Borrando business: ");
@@ -120,4 +129,14 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
     }
   }
 
+  getHandlerResponse(response:ResponseReaxium): void {
+    if(response.ReaxiumResponse.code != Constants.SUCCESSFUL_RESPONSE_CODE){
+      console.log("Error servicio: "+ response.ReaxiumResponse.message);
+      this.msgs2.push({
+        severity:'warn',
+        summary:'Invalidated User',
+        detail:'The user is not master and it has to for create o update.'
+      });
+    }
+  }
 }

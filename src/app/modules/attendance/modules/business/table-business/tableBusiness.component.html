@@ -1,4 +1,5 @@
 <div>
+  <p-growl [value]="msgs2" [life]="3000"></p-growl>
   <button *ngIf="master" class="btn btn-" style="margin: -5px 400px" [routerLink]="['newBusiness']">+</button>
 </div>
 <t4ss-data-table [dataSet]=business

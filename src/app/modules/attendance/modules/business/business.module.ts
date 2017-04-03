@@ -12,6 +12,7 @@ import {BUSINESS_ROUTES} from "./business.routes";
 import { RouterModule, Routes } from '@angular/router';
 import { EditBusinessComponent } from "./edit-business/editBusiness.component";
 import { TableBusinessComponent } from "./table-business/tableBusiness.component";
+import {InputTextModule,GrowlModule,CheckboxModule}  from 'primeng/primeng';
 
 
 @NgModule({
@@ -21,7 +22,10 @@ import { TableBusinessComponent } from "./table-business/tableBusiness.component
     ReactiveFormsModule,
     MaterialModule,
     DataTableModule,
-    RouterModule.forRoot(BUSINESS_ROUTES)],
+    RouterModule.forRoot(BUSINESS_ROUTES),
+    InputTextModule,
+    GrowlModule,
+    CheckboxModule],
   declarations: [
     BusinessComponent,
     EditBusinessComponent,

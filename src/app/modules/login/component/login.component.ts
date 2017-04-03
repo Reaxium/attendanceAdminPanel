@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, onSpinnerListener{
        localStorage.setItem("rememberPass","false");
        localStorage.setItem("userName","");
        localStorage.setItem("passUser","");
+
     }else{
       this.checked = (localStorage.getItem("rememberPass") == "true") ? true : false;
       this.userLoginName = localStorage.getItem("userName");
@@ -89,7 +90,7 @@ export class LoginComponent implements OnInit, onSpinnerListener{
         userTypeId:responseHanlder.user_type.user_type_id,
         userTypeName:responseHanlder.user_type.user_type_name
       };
-
+      sessionStorage.getItem('userInformation');
       sessionStorage.setItem("userInformation",JSON.stringify(userInfo));
       sessionStorage.setItem("menu",JSON.stringify(responseHanlder.menu));
       this.router.navigate(['/attendance/dashboard']);
