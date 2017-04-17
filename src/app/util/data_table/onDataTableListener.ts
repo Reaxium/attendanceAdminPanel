@@ -7,4 +7,5 @@ export interface onDataTableListener {
   onSortByColumn(columnIdName: String): void;
   onPageChange(page: number): void;
   onOptionSelected(option:DataTableOption,dataObject: any):void;
+  //onObjects(objects: any[]):void;
 }

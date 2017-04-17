@@ -11,6 +11,7 @@ export class Business {
   business_type: BusinessType;
   status: BusinessStatus;
   address_id: string;
+  check: boolean;
 
 }
 

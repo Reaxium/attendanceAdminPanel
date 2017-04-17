@@ -28,10 +28,10 @@
       // other libraries
       'rxjs': 'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'ng2-pagination':             'https://rawgit.com/michaelbromley/ng2-pagination/master/dist',
+      'ng2-pagination': 'npm:ng2-pagination/dist//',//https://rawgit.com/michaelbromley/ng2-pagination/master/dist',
       'moment': 'node_modules/moment/moment.js',
       'ng2-bootstrap/ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
-      'primeng':                   'npm:primeng',
+      'primeng': 'npm:primeng',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

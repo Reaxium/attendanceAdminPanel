@@ -10,7 +10,7 @@ import {DataTableOption} from "./option";
   selector: 't4ss-data-table',
   templateUrl: "./app/util/data_table/datatable.component.html",
 })
-export class DataTableComponent {
+export class DataTableComponent{
 
   @Input() dataSet: any[];
   @Input() enableFilter = false;
@@ -21,6 +21,8 @@ export class DataTableComponent {
   @Input() dataPerPage = 3;
   columns: ColumnComponent[] = [];
   query: string;
+
+
 
   addColumn(column: any): void {
     this.columns.push(column);
@@ -41,5 +43,24 @@ export class DataTableComponent {
   optionSelected(option: DataTableOption, dataObject: any): void {
     this.listener.onOptionSelected(option,dataObject);
   }
+
+  selectedOptionType(option: any,type: string): boolean {
+    if(option.type==type){
+      return true;
+    }
+    return false;
+  }
+
+  /*checkbox2(objects: any): void{
+    console.log('objects=', objects);
+  }
+
+  checkbox(objects: any[]):void{
+    this.display = !this.display;
+    if(this.display){
+    console.log('objects=', objects);
+    this.listener.onObjects(objects);
+    }
+  }*/
 
 }

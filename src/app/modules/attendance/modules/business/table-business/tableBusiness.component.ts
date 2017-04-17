@@ -22,8 +22,16 @@ import { Message } from 'primeng/primeng';
 })
 
 export class TableBusinessComponent implements onDataTableListener,OnInit {
+  get options(): DataTableOption[] {
+    return this._options;
+  }
+
+  set options(value: DataTableOption[]) {
+    this._options = value;
+  }
 
   master : boolean; //== true;//
+  //tableCustom: string; //normal owner worker
   userId : string;
   msgs2: Message[] = [];
   business: Business[];
@@ -33,12 +41,12 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
   dataPerPage: number = 5;
   actualQuery: string = "";
   actualSort: string = "business_name";
-  options: DataTableOption[] = [
+  private _options: DataTableOption[] = [
     {
       id:"edit",
       src: "",
       className: "fa fa-fw fa-pencil",
-      type: "",
+      type: "a",
       html: "",
       title:"Editar"
     },
@@ -46,21 +54,32 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       id:"delete",
       src: "",
       className: "fa fa-fw fa-trash",
-      type: "",
+      type: "a",
       html: "",
       title:"Borrar"
     }
   ];
+  objects: any[]=[];
 
-  constructor(private businessService: BusinessService,private http: Http,private router: Router) {
+  constructor(private route: ActivatedRoute,private businessService: BusinessService,private http: Http,private router: Router) {
   }
 
   ngOnInit(): void {
-    this.getBusinessObservable();
-    const userInformation = sessionStorage.getItem('userInformation');
-    const userTypeId = JSON.parse(userInformation).businessTypeId;
-    this.master = userTypeId==3 ? true : false;
-    this.userId = JSON.parse(userInformation).userId;
+    /*this.route.params.subscribe(
+      (params: any) => {
+        this.tableCustom = params;
+      }
+    );
+    console.log('this.tableCustom',this.tableCustom);*/
+    //if(this.tableCustom=='normal'){
+      this.getBusinessObservable();
+      const userInformation = sessionStorage.getItem('userInformation');
+      const userTypeId = JSON.parse(userInformation).businessTypeId;
+      this.master = userTypeId==3 ? true : false;
+      this.userId = JSON.parse(userInformation).userId;
+    /*}else{
+      this.getBusinessObservableCustom();
+    }*/
   }
 
   getBusinessObservable(): void {
@@ -68,7 +87,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       ReaxiumParameters: {
         Business: {
           filter: this.actualQuery,
-          business_id:1,
+          business_id:"",
           page: this.actualPage,
           sort: this.actualSort,
           limit: this.dataPerPage
@@ -128,6 +147,11 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
         break;
     }
   }
+
+  /*onObjects(objects: any[]):void{
+    this.objects.push(objects);
+    console.log("OBJETOSSSSSS = ", this.objects);
+  }*/
 
   getHandlerResponse(response:ResponseReaxium): void {
     if(response.ReaxiumResponse.code != Constants.SUCCESSFUL_RESPONSE_CODE){

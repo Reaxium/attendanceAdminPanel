@@ -11,7 +11,10 @@
     <td *ngFor="let column of columns">
       <div *ngIf="column.dataColumn">{{row[column.value]}}</div>
       <div *ngIf="column.actionColumn">
-          <a *ngFor="let option of column.options" (click)="optionSelected(option,row)" title="{{option.title}}"><small><i class="{{option.className}}"></i> </small></a>
+        <td *ngFor="let option of column.options">
+          <a *ngIf="selectedOptionType(option,'a')" (click)="optionSelected(option,row)" title="{{option.title}}"><small><i class="{{option.className}}"></i></small></a>
+          <input *ngIf="selectedOptionType(option,'b')" type="checkbox" [checked]= "row.check" (click)="optionSelected(option,row)">
+        </td>
       </div>
     </td>
   </tr>

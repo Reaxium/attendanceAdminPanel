@@ -16,13 +16,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 export class BusinessComponent implements OnInit {
 
-
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
     this.router.navigate(['attendance/business/table']);
   }
-
 
 }

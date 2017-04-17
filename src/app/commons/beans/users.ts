@@ -6,4 +6,5 @@ export class Users {
   first_name: string;
   first_last_name: string;
   document_id: string;
+  check: boolean;
 }

@@ -56,7 +56,7 @@ export class BusinessService {
   }
 
 
-  storeOrEditBusiness(business: Business, userID: string){
+  storeOrEditBusiness(business: Business, userID: string, relationsID: string[]){
       var parameters = {
         ReaxiumParameters: {
           Business: {
@@ -65,7 +65,8 @@ export class BusinessService {
             business_id_number: business.business_id_number,
             status_id: business.status_id,
             business_type_id: business.business_type_id,
-            userIdInSession: userID
+            userIdInSession: userID,
+            business_relationship: relationsID
           }
         }
       };
