@@ -51,16 +51,4 @@ export class DataTableComponent{
     return false;
   }
 
-  /*checkbox2(objects: any): void{
-    console.log('objects=', objects);
-  }
-
-  checkbox(objects: any[]):void{
-    this.display = !this.display;
-    if(this.display){
-    console.log('objects=', objects);
-    this.listener.onObjects(objects);
-    }
-  }*/
-
 }

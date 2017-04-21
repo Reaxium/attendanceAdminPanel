@@ -12,7 +12,7 @@ import {BUSINESS_ROUTES} from "./business.routes";
 import { RouterModule, Routes } from '@angular/router';
 import { EditBusinessComponent } from "./edit-business/editBusiness.component";
 import { TableBusinessComponent } from "./table-business/tableBusiness.component";
-import {InputTextModule,GrowlModule,CheckboxModule}  from 'primeng/primeng';
+import {InputTextModule,GrowlModule,CheckboxModule,DialogModule}  from 'primeng/primeng';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import {InputTextModule,GrowlModule,CheckboxModule}  from 'primeng/primeng';
     RouterModule.forRoot(BUSINESS_ROUTES),
     InputTextModule,
     GrowlModule,
-    CheckboxModule],
+    CheckboxModule,
+    DialogModule],
   declarations: [
     BusinessComponent,
     EditBusinessComponent,

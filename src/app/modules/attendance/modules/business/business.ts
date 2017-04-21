@@ -9,6 +9,7 @@ export class Business {
   business_type_id: string;
   business_logo: string;
   business_type: BusinessType;
+  business_relationship: string[];
   status: BusinessStatus;
   address_id: string;
   check: boolean;

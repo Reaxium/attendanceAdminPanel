@@ -24,6 +24,7 @@ import {ResponseReaxium} from "../../../login/services/responseReaxium";
 export class BusinessService {
   private business: Business;
   private businessGetApiURL = "http://localhost/attendance_cloud/Business/allBusinessFiltered";
+  private businessGetRelations = "http://localhost/attendance_cloud/Business/getBusiness";
   private businessStoreApiURL = "http://localhost/attendance_cloud/Business/createBusiness";
   private businessDeleteApiURL = "http://localhost/attendance_cloud/Business/deleteBusiness";
   //private businesssApiURL = "http://34.208.166.161/school_bus_cloud/Business/allBusinessFiltered";
@@ -55,8 +56,22 @@ export class BusinessService {
       .catch(this.handleErrorObservable);
   }
 
+  getBusinessAndRelations(parameters: any): Observable<ResponseWithPagination> {
+    console.log("llego 1");
+    return this.http.post(this.businessGetRelations, JSON.stringify(parameters), this.headers)
+      .map(response => response.json() as ResponseWithPagination)
+      .catch(this.handleErrorObservable);
+  }
+
 
   storeOrEditBusiness(business: Business, userID: string, relationsID: string[]){
+    if(business.business_type_id == "Worker"){
+      business.business_type_id = "1";
+    }else if(business.business_type_id == "Owner"){
+      business.business_type_id = "2";
+    }else if(business.business_type_id == "Master"){
+      business.business_type_id = "3";
+    }
       var parameters = {
         ReaxiumParameters: {
           Business: {

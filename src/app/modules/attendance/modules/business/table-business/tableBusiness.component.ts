@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Business } from "../business";
 import { BusinessService } from "../business.service";
-import {onDataTableListener } from "../../../../../util/data_table/onDataTableListener";
+import { onDataTableListener } from "../../../../../util/data_table/onDataTableListener";
 import { DataTableOption } from "../../../../../util/data_table/option";
 import { Http } from "@angular/http";
 import { BUSINESS_ROUTES } from "../business.routes";
@@ -88,6 +88,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
         Business: {
           filter: this.actualQuery,
           business_id:"",
+          business_type_id:"",
           page: this.actualPage,
           sort: this.actualSort,
           limit: this.dataPerPage
@@ -108,7 +109,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
     if (query == "") {
       this.actualQuery = "";
       this.getBusinessObservable();
-    } else if (query.length > 3) {
+    } else if (query.length > 2) {
       this.actualQuery = query;
       this.getBusinessObservable();
     }
@@ -148,10 +149,6 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
     }
   }
 
-  /*onObjects(objects: any[]):void{
-    this.objects.push(objects);
-    console.log("OBJETOSSSSSS = ", this.objects);
-  }*/
 
   getHandlerResponse(response:ResponseReaxium): void {
     if(response.ReaxiumResponse.code != Constants.SUCCESSFUL_RESPONSE_CODE){
