@@ -23,7 +23,7 @@ import { DialogModule } from 'primeng/primeng';
 export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnDestroy {
   businessForm: FormGroup;
   listBusiness: Business[]=[];
-  listBusinessRelations: Business[]=[];
+  listBusinessIdRelations: Business[]=[];
   openListBusiness = false; // lo dejare porque es uan variable que puede servir para q aparezca las relaciones si las hay
   msgs: Message[] = [];
   /* variables para la tabla */
@@ -43,7 +43,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
       title:"Editar"
     }
   ];
-  options2: DataTableOption[] = [
+ options2: DataTableOption[] = [
     {
       id:"delete",
       src: "",
@@ -131,7 +131,8 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
         status_id: [params.status_id, Validators.required],
         business_type_id: [this.businessTypeId, Validators.required]
       });
-       //this.getBusinessAndRelations(this.businessForm.value.business_id);
+       this.getBusinessAndRelations(this.businessForm.value.business_id);
+
     }
 
 
@@ -173,28 +174,33 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
    });
    }
 
-  /*getBusinessAndRelations(businessID: string): void {
+  getBusinessAndRelations(businessID: string): void {
     var parameters = {
       ReaxiumParameters: {
         Business: {
-          business_id: businessID
+          business_id: businessID,
+          filter: this.actualQuery,
+          page: this.actualPage,
+          sort: this.actualSort,
+          limit: this.dataPerPage
         }
       }
     };
     this.businessService.getBusinessAndRelations(parameters).subscribe(response => {
       if (response.ReaxiumResponse.code == 0) {
-        this.listBusinessRelations = response.ReaxiumResponse.object.data;
-        this.getBusinessObservableCustom(this.businessForm.value.business_id);
-        if(this.listBusinessRelations.length>0){this.openListBusiness=true;}
-       // for(let i=0;i<this.listBusiness.length;i++){
-       //   if(this.listBusiness[i].business_id==)
-       // }
-        console.log("listBusinessRelations= ", this.listBusinessRelations[0].business_relationship);
+        this.listBusinessIdRelations = response.ReaxiumResponse.object.data;
+
+        console.log("listBusinessRelations= ", this.listBusinessIdRelations[0].business_id);
+        for(let i=0;i<this.listBusinessIdRelations.length;i++){
+          this.objects.push(this.listBusinessIdRelations[i].business_id);
+        }
+        if(this.objects.length>0){this.openListBusiness=true;}
+        console.log("this.objects: ", this.objects);
       } else {
-        this.listBusinessRelations = [];
+        this.listBusinessIdRelations = [];
       }
     });
-  }*/
+  }
 
 
   storeOrEditBusiness(business: Business, userID: string,relationsID: string[]){
@@ -220,52 +226,74 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
   onDataTableSearch(query: string): void {
     if (query == "") {
       this.actualQuery = "";
-      this.getBusinessObservableCustom(this.businessForm.value.business_id);
+      if(this.displayPopUp==true){
+        this.getBusinessObservableCustom(this.businessForm.value.business_id);
+      }else{
+        this.getBusinessAndRelations(this.businessForm.value.business_id);
+      }
     } else if (query.length > 2) {
       this.actualQuery = query;
-      this.getBusinessObservableCustom(this.businessForm.value.business_id);
+      if(this.displayPopUp==true){
+        this.getBusinessObservableCustom(this.businessForm.value.business_id);
+      }else{
+        this.getBusinessAndRelations(this.businessForm.value.business_id);
+      }
     }
   }
 
   onSortByColumn(columnName: string): void {
     this.actualSort = columnName;
-    this.getBusinessObservableCustom(this.businessForm.value.business_id);
+    if(this.displayPopUp==true){
+      this.getBusinessObservableCustom(this.businessForm.value.business_id);
+    }else{
+      this.getBusinessAndRelations(this.businessForm.value.business_id);
+    }
   }
 
 
   onPageChange(page: number): void {
     this.actualPage = page;
-    this.getBusinessObservableCustom(this.businessForm.value.business_id);
+    if(this.displayPopUp==true){
+      this.getBusinessObservableCustom(this.businessForm.value.business_id);
+    }else{
+      this.getBusinessAndRelations(this.businessForm.value.business_id);
+    }
   }
 
 
   onOptionSelected(option: DataTableOption,dataObject: any): void {
+    if(this.displayPopUp!=true){
+      this.options = this.options2;
+    }
     switch (option.id){
       case "checkbox":
         if(this.searchObjList(dataObject.business_id)){
-          this.deleteBusinessSelect(dataObject.business_id,this.objects);
+          this.deleteBusinessSelect(dataObject.business_id, this.objects);
+          this.deleteBusinessRelationSelect(dataObject, this.listBusinessIdRelations);
         }else{
           this.objects.push(dataObject.business_id);
+          this.listBusinessIdRelations.push(dataObject);
         }
         console.log("this.objects: ", this.objects);
         break;
       case "delete":
         console.log("Borrando business: ");
-        console.log(dataObject);
+        this.deleteBusinessSelect(dataObject.business_id, this.objects);
+        console.log("this.objects: ", this.objects);
         break;
     }
   }
 
   /**
    *  Metodo que devuelve true si el parametro se encuentra en el arreglo this.objects
-   * @param businesID
+   * @param businessID
    * @returns {boolean}
    */
-  searchObjList(businesID: string): boolean{
+  searchObjList(businessID: string): boolean{
     let validate = false;
     if (this.objects.length > 0) {
-      for(let i=0;this.objects.length;i++){
-        if(this.objects[i]==businesID){
+      for(let i=0;i<this.objects.length;i++){
+        if(this.objects[i]==businessID){
           validate = true;
           i=this.objects.length;
         }
@@ -274,16 +302,26 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
     return validate;
   }
 
-  /**
-   * Metodo que elimina el parametro que se introdujo del arreglo que introdujo en el segundo parametro
-   * @param businesID
-   * @param objects
-   */
-
-  deleteBusinessSelect(businesID: any, objects: any[]): void {
-    let index: number = objects.indexOf(businesID);
+  deleteBusinessSelect(BusinessID: any, objects: any[]): void{
+    let index: number = objects.indexOf(BusinessID);
     if (index !== -1) {
       objects.splice(index, 1);
+    }
+  }
+
+  deleteBusinessRelationSelect(BusinessID: any, objects: any[]): void{
+    let index = -1;
+    for (let i = 0; i < objects.length; i++) {
+      if (objects[i].business_id == BusinessID) {
+        index = i;
+        break;
+      }
+    }
+
+    objects.splice(index, 1);
+
+    if(objects.length == 0){
+      this.openListBusiness=false;
     }
   }
 

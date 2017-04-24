@@ -157,11 +157,11 @@
                   <tbody>
                   <tr>
                     <td>
-                    <h3 style="width: 254px;margin: 41px 0px 10px">RelationShip Business List</h3>
-                      <t4ss-data-table [dataSet]=listBusinessRelations[0].business_relationship
+                    <h3 style="width: 500px;margin: 41px 0px 10px">RelationShip Business List</h3>
+                      <t4ss-data-table [dataSet]=listBusinessIdRelations
                                        [listener]=component
                                        [enableFilter]="true"
-                                       [enablePagination]="true"
+                                       [enablePagination]="false"
                                        [actualPage]=actualPage
                                        [totalItems]=totalItems
                                        [dataPerPage]=dataPerPage>
