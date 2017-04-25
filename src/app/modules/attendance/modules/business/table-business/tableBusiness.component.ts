@@ -65,21 +65,11 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
   }
 
   ngOnInit(): void {
-    /*this.route.params.subscribe(
-      (params: any) => {
-        this.tableCustom = params;
-      }
-    );
-    console.log('this.tableCustom',this.tableCustom);*/
-    //if(this.tableCustom=='normal'){
       this.getBusinessObservable();
       const userInformation = sessionStorage.getItem('userInformation');
       const userTypeId = JSON.parse(userInformation).businessTypeId;
       this.master = userTypeId==3 ? true : false;
       this.userId = JSON.parse(userInformation).userId;
-    /*}else{
-      this.getBusinessObservableCustom();
-    }*/
   }
 
   getBusinessObservable(): void {
@@ -156,7 +146,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       this.msgs2.push({
         severity:'warn',
         summary:'Invalidated User',
-        detail:'The user is not master and it has to for create o update.'
+        detail: 'The user is not master and it has to for create o update.'
       });
     }
   }

@@ -74,8 +74,6 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
             this.initForm(params);
           }
         );
-       // console.log("this.businessForm.value.business_id= ",this.businessForm.value.business_id);
-       // this.getBusinessAndRelations(this.businessForm.value.business_id);
   }
 
   onSubmit(){
@@ -214,8 +212,8 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
       console.log("Error servicio: "+ response.ReaxiumResponse.message);
       this.msgs.push({
         severity:'warn',
-        summary:'Invalidated User',
-        detail:'The user is not master and it has to for create o update.'
+        summary:'Invalidated',
+        detail: response.ReaxiumResponse.message//'The user is not master and it has to for create o update.'
       });
     }else if(response.ReaxiumResponse.code == Constants.SUCCESSFUL_RESPONSE_CODE){
       this.onCancel();

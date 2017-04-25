@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-xs-12">
+    <p-growl [value]="msgs" [life]="3000"></p-growl>
+    <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label type="hidden" for="device_id"></label>
+        <input
+          type="hidden"
+          id="device_id"
+          class="form-control"
+          formControlName="device_id">
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="device_name">Device Name</label>
+            <input
+              type="text"
+              id="device_name"
+              class="form-control"
+              formControlName="device_name">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="device_description">Device Description</label>
+            <input
+              type="text"
+              id="device_description"
+              class="form-control"
+              formControlName="device_description">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="device_serial">Device Serial Number</label>
+            <input
+              type="text"
+              id="device_serial"
+              class="form-control"
+              formControlName="device_serial">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" style="margin-left: 300px;padding: 6px 12px" class="btn btn-" [disabled]="!deviceForm.valid">Save</button>
+          <a class="btn btn-" style="margin-left: 8px"  (click)="onCancel()">Cancel</a> <!-- -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm 12">
+    <div class="content">
+      <div class="box box-primary box-solid">
+        <div class="box-body">
+          <div class="col-md-5">
+            <div class="box-no-shadow box-info">
+              <div class="box-search">
+                <table>
+                  <tbody>
+                  <tr>
+                    <h3 style="width: 300px;margin: 41px 0px 10px">Add School</h3>
+                    <td>  <!--(click)="businessInformation()" -->
+                      <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
+                              type="button"
+                              style="margin-top: 33px"
+                              title="Show Business">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!--Tables business-->
+
+        </div>
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+  </div>
+</div>
+

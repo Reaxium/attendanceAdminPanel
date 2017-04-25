@@ -3,9 +3,9 @@
  */
 
 import {Status} from './Status';
-import {Business} from './Business';
 import {UserType} from './UserType';
 import {Menu} from './Menu';
+import {Business} from "../../modules/attendance/modules/business/business";
 
 
 export class UserInfoAccess{

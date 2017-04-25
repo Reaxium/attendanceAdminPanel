@@ -3,7 +3,7 @@
  */
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {Device} from "../../../../../commons/beans/device";
+import {Device} from "./devices";
 
 @Injectable()
 export class DeviceService {
@@ -15,4 +15,6 @@ export class DeviceService {
     return this.http.get("/app/data/devices.json").toPromise().then(res => res.json() as Device[]);
   }
 
-}
+}/**
+ * Created by eduardo on 4/24/2017.
+ */
