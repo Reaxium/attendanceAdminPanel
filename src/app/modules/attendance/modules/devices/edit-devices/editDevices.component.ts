@@ -13,6 +13,8 @@ import {DataTableOption} from "../../../../../util/data_table/option";
 import { DialogModule } from 'primeng/primeng';
 import {DeviceService} from "../device.service";
 import {Device} from "../devices";
+import {Business} from "../../business/business";
+import {EditBusinessComponent} from "../../business/edit-business/editBusiness.component";
 
 
 @Component({
@@ -25,6 +27,11 @@ export class EditDeviceComponent implements OnInit{
   listBusiness: Device[]=[];
   openListBusiness = false;
   msgs: Message[] = [];
+  businessRelatedList: any[]=[];
+  businessOwnerList: Business[]=[];
+  businessWorkerdList: Business[]=[];
+  //editBusiness: EditBusinessComponent; this.editBusiness.getBusinessObservableCustom(this.prueba); (usar clases nuevas)
+
   /* variables para la tabla */
 
   constructor(private route: ActivatedRoute,
@@ -34,21 +41,20 @@ export class EditDeviceComponent implements OnInit{
   }
 
   ngOnInit() {
-    /*this.route.params.subscribe(
+    this.route.params.subscribe(
       (params: any) => {
         this.initForm(params);
       }
-    );*/
-    this.initForm("");
+    );
+    //this.initForm("");
   }
 
   onSubmit(){
     console.log('onSubmit');
-    const newBusiness = this.deviceForm.value;
+    const newDevice = this.deviceForm.value;
     const userInformation = sessionStorage.getItem('userInformation');
     const userID = JSON.parse(userInformation).userId;
-    //this.storeOrEditBusiness(newBusiness,userID,this.objects);
-    //this.onCancel();
+    this.storeOrEditDevices(newDevice,userID);//,this.objects);
   }
 
   onCancel(){
@@ -64,11 +70,35 @@ export class EditDeviceComponent implements OnInit{
     this.deviceForm = this.formBuilder.group({
       device_id: [params.device_id],
       device_name: [params.device_name, Validators.required],
-      device_description: [params.device_description, Validators.required],
-      device_serial: [params.device_serial, Validators.required]
+      device_serial: [params.device_serial, Validators.required]//,
+      //business_owner_name: [params.business_owner_name, Validators.required],
+      //business_owner_id: [params.business_owner_id, Validators.required],
+      //business_worker_name: [params.business_worker_name, Validators.required],
+      //business_worker_id: [params.business_worker_id, Validators.required]
+
     });
 
   }
 
+  /* Servicios */
+
+  storeOrEditDevices(device: Device, userID: string){//,relationsID: string[]){
+    this.deviceService.storeOrEditDevices(device,userID).subscribe(//,relationsID).subscribe(
+      //data => console.log(data),
+      ResponseReaxium => this.getHandlerResponse(ResponseReaxium));
+  }
+
+  getHandlerResponse(response:ResponseReaxium): void {
+    if(response.ReaxiumResponse.code != Constants.SUCCESSFUL_RESPONSE_CODE){
+      console.log("Error servicio: "+ response.ReaxiumResponse.message);
+      this.msgs.push({
+        severity:'warn',
+        summary:'Invalidated',
+        detail: response.ReaxiumResponse.message
+      });
+    }else if(response.ReaxiumResponse.code == Constants.SUCCESSFUL_RESPONSE_CODE){
+      this.onCancel();
+    }
+  }
 
 }

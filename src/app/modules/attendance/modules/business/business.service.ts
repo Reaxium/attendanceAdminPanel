@@ -24,7 +24,7 @@ import {ResponseReaxium} from "../../../login/services/responseReaxium";
 export class BusinessService {
   private business: Business;
   private businessGetApiURL = "http://localhost/attendance_cloud/Business/allBusinessFiltered";
-  private businessGetRelations = "http://localhost/attendance_cloud/Business/getBusiness";
+  private businessGetRelations = "http://localhost/attendance_cloud/Business/getBusinessRelations";
   private businessStoreApiURL = "http://localhost/attendance_cloud/Business/createBusiness";
   private businessDeleteApiURL = "http://localhost/attendance_cloud/Business/deleteBusiness";
   //private businesssApiURL = "http://34.208.166.161/school_bus_cloud/Business/allBusinessFiltered";

@@ -11,12 +11,12 @@
                  [dataPerPage]=dataPerPage>
   <datatable-column [dataColumn]=true [value]="'device_id'" [header]="'ID'"></datatable-column>
   <datatable-column [dataColumn]=true [value]="'device_serial'" [header]="'Device Serial'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'device_bus_number'" [header]="'Bus Number'"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'bus_info'" [header]="'Bus Number'"></datatable-column>
   <datatable-column [dataColumn]=true [value]="'device_name'" [header]="'Device Name'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'device_last_conection'" [header]="'Last Connection'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'device_temp'" [header]="'Temp.(F)'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'device_charging'" [header]="'Charging?'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'device_battery_level'" [header]="'Battery Level'"></datatable-column>
-  <datatable-column [dataColumn]=true [value]="'device_last_sync'" [header]="'Last Sync'"></datatable-column>
-  <datatable-column [actionColumn]=true [value]="" [header]="'Actionsss'" [options]="options"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'last_status_update'" [header]="'Last Connection'"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'temperatura'" [header]="'Temp.(F)'"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'is_charging'" [header]="'Charging?'"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'battery_power_level'" [header]="'Battery Level'"></datatable-column>
+  <datatable-column [dataColumn]=true [value]="'last_sync'" [header]="'Last Sync'"></datatable-column>
+  <datatable-column [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
 </t4ss-data-table>

@@ -74,6 +74,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
             this.initForm(params);
           }
         );
+    this.getBusinessAndRelations(this.businessForm.value.business_id);
   }
 
   onSubmit(){
@@ -129,8 +130,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
         status_id: [params.status_id, Validators.required],
         business_type_id: [this.businessTypeId, Validators.required]
       });
-       this.getBusinessAndRelations(this.businessForm.value.business_id);
-
+       //this.getBusinessAndRelations(this.businessForm.value.business_id);
     }
 
 
@@ -141,6 +141,10 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
     );
   }*/
 
+  /**
+   * Metodo que llama al servicio que llama todos los business segun si tiene business id o no
+   * @param businessID
+   */
   getBusinessObservableCustom(businessID: string): void {
     console.log(' businessID de cuando quieres agregar ', businessID);
     if(businessID == null){businessID = "";}
@@ -172,6 +176,11 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
    });
    }
 
+  /**
+   * Metodo que llama al servicio que solo obtiene un business segun el business ID que obtenga el parametro y
+   * sus business asociados
+   * @param businessID
+   */
   getBusinessAndRelations(businessID: string): void {
     var parameters = {
       ReaxiumParameters: {
@@ -200,7 +209,12 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
     });
   }
 
-
+  /**
+   * Metodo que llama el servicio para guardar o editar un nuevo business
+   * @param business
+   * @param userID
+   * @param relationsID
+   */
   storeOrEditBusiness(business: Business, userID: string,relationsID: string[]){
     this.businessService.storeOrEditBusiness(business,userID,relationsID).subscribe(
       //data => console.log(data),
@@ -273,6 +287,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
           this.listBusinessIdRelations.push(dataObject);
         }
         console.log("this.objects: ", this.objects);
+        console.log("this.listBusinessIdRelations: ", this.listBusinessIdRelations);
         break;
       case "delete":
         console.log("Borrando business: ");
