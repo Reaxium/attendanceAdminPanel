@@ -13,12 +13,10 @@ import {ResponseReaxium} from "../../../login/services/responseReaxium";
 export class DeviceService {
   private devices: Device;
   private devicesGetApiURL = "http://localhost/attendance_cloud/Device/allDeviceWithPagination";
-  //private devicesGetRelations = "http://localhost/attendance_cloud/Business/getBusiness";
+  private devicesGetBusinessURL = "http://localhost/attendance_cloud/Business/allBusinessFiltered";
+  private devicesGetBusinessRelatedURL = "http://localhost/attendance_cloud/Device/getBusinessRelationsWithADevice";
   private devicesStoreApiURL = "http://localhost/attendance_cloud/Device/createDeviceOrUpdate";
-  //private devicesDeleteApiURL = "http://localhost/attendance_cloud/Business/deleteBusiness";
-  //private businesssApiURL = "http://34.208.166.161/school_bus_cloud/Business/allBusinessFiltered";
   private headers = new Headers({'Content-Type': 'application/json'});
-  private prueba: any[]=[];
 
   constructor(private http: Http) {
   }
@@ -33,7 +31,19 @@ export class DeviceService {
       .catch(this.handleErrorObservable);
   }
 
-  storeOrEditDevices(device: Device, userID: string){//, relationsID: string[]){
+  getAllBusinessByType(parameters: any): Observable<ResponseWithPagination> {
+    return this.http.post(this.devicesGetBusinessURL, JSON.stringify(parameters), this.headers)
+      .map(response => response.json() as ResponseWithPagination)
+      .catch(this.handleErrorObservable);
+  }
+
+  getBusinessRelatedToDevice(parameters: any): Observable<ResponseWithPagination> {
+    return this.http.post(this.devicesGetBusinessRelatedURL, JSON.stringify(parameters), this.headers)
+      .map(response => response.json() as ResponseWithPagination)
+      .catch(this.handleErrorObservable);
+  }
+
+  storeOrEditDevices(device: Device, userID: string, relationsID: string[]){
     var parameters = {
       ReaxiumParameters: {
         ReaxiumDevice: {
@@ -41,7 +51,7 @@ export class DeviceService {
           device_name: device.device_name,
           device_serial: device.device_serial,
           userIdInSession: userID,
-          device_relations:this.prueba
+          device_relations:relationsID
         }
       }
 

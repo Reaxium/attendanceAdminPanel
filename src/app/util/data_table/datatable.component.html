@@ -14,6 +14,10 @@
         <td *ngFor="let option of column.options">
           <a *ngIf="selectedOptionType(option,'a')" (click)="optionSelected(option,row)" title="{{option.title}}"><small><i class="{{option.className}}"></i></small></a>
           <input *ngIf="selectedOptionType(option,'b')" type="checkbox" [checked]= "row.check" (click)="optionSelected(option,row)">
+          <input *ngIf="selectedOptionType(option,'c')" name="radio" type="radio" [value]="row" [checked]= "row.check" (click)="optionSelected(option,row)">
+        <!--  <form ngForm action="">
+            <input *ngIf="selectedOptionType(option,'c')" type="radio" (click)="optionSelected(option,row)">
+          </form>-->
         </td>
       </div>
     </td>

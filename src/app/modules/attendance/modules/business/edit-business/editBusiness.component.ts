@@ -31,6 +31,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
   actualPage: number = 1;
   totalItems: number = 0;
   dataPerPage: number = 5;
+  dataPerPageR: number;
   actualQuery: string = "";
   actualSort: string = "business_name";
   options: DataTableOption[] = [
@@ -164,6 +165,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
      if (response.ReaxiumResponse.code == 0) {
        this.totalItems = response.ReaxiumResponse.object.totalRecords;
        this.listBusiness = response.ReaxiumResponse.object.data;
+       this.dataPerPageR = this.listBusiness.length;
        console.log("this.listBusiness= ",this.listBusiness[0]);
        for(let i=0;i<this.listBusiness.length;i++){
          if(this.searchObjList(this.listBusiness[i].business_id)){
@@ -187,9 +189,9 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
         Business: {
           business_id: businessID,
           filter: this.actualQuery,
-          page: this.actualPage,
-          sort: this.actualSort,
-          limit: this.dataPerPage
+          //page: this.actualPage,
+          sort: this.actualSort//,
+          //limit: this.dataPerPage
         }
       }
     };
@@ -197,7 +199,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
       if (response.ReaxiumResponse.code == 0) {
         this.listBusinessIdRelations = response.ReaxiumResponse.object.data;
 
-        console.log("listBusinessRelations= ", this.listBusinessIdRelations[0].business_id);
+        console.log("listBusinessRelations= ", this.listBusinessIdRelations);
         for(let i=0;i<this.listBusinessIdRelations.length;i++){
           this.objects.push(this.listBusinessIdRelations[i].business_id);
         }
@@ -285,6 +287,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
         }else{
           this.objects.push(dataObject.business_id);
           this.listBusinessIdRelations.push(dataObject);
+          this.openListBusiness=true;
         }
         console.log("this.objects: ", this.objects);
         console.log("this.listBusinessIdRelations: ", this.listBusinessIdRelations);
@@ -292,6 +295,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
       case "delete":
         console.log("Borrando business: ");
         this.deleteBusinessSelect(dataObject.business_id, this.objects);
+        this.deleteBusinessRelationSelect(dataObject, this.listBusinessIdRelations);
         console.log("this.objects: ", this.objects);
         break;
     }
@@ -317,9 +321,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
 
   deleteBusinessSelect(BusinessID: any, objects: any[]): void{
     let index: number = objects.indexOf(BusinessID);
-    if (index !== -1) {
       objects.splice(index, 1);
-    }
   }
 
   deleteBusinessRelationSelect(BusinessID: any, objects: any[]): void{

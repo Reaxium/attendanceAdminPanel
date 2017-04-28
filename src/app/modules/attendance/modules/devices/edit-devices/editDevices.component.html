@@ -11,7 +11,7 @@
           class="form-control"
           formControlName="device_id">
       </div>
-<!--
+
       <div class="form-group">
         <label type="hidden" for="business_owner_id"></label>
         <input
@@ -20,16 +20,16 @@
           class="form-control"
           formControlName="business_owner_id">
       </div>
-
-      <div class="form-group">
-        <label type="hidden" for="business_worker_id"></label>
-        <input
-          type="hidden"
-          id="business_worker_id"
-          class="form-control"
-          formControlName="business_worker_id">
-      </div>
--->
+      <!--
+            <div class="form-group">
+              <label type="hidden" for="business_worker_id"></label>
+              <input
+                type="hidden"
+                id="business_worker_id"
+                class="form-control"
+                formControlName="business_worker_id">
+            </div>
+      -->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -44,6 +44,7 @@
       </div>
 
 
+
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -56,33 +57,45 @@
           </div>
         </div>
       </div>
-<!--
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="business_owner_name">Business Owner Related</label>
-            <input
-              type="text"
-              id="business_owner_name"
-              class="form-control"
-              formControlName="business_owner_name">
-          </div>
-        </div>
-      </div>
 
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="business_worker_name">Business Worker Welated</label>
+            <label for="business_owner_name">Business Owner Related</label>
+            <tr>
             <input
               type="text"
-              id="business_worker_name"
+              id="business_owner_name"
               class="form-control"
-              formControlName="business_worker_name">
+              [(ngModel)]="businessOwnerName"
+              formControlName="business_owner_name" readonly>
+            <td>
+              <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
+                      type="button"
+                      (click)="listOfBusiness(businessOwnerType,businessOwnerId)"
+                      title="Show Business">
+                <i class="fa fa-search"></i>
+              </button>
+            </td> <!-- [hidden]="!displayAlert" -->
+            </tr>
           </div>
         </div>
       </div>
--->
+      <!--
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="business_worker_name">Business Worker Welated</label>
+                  <input
+                    type="text"
+                    id="business_worker_name"
+                    class="form-control"
+                    formControlName="business_worker_name">
+                </div>
+              </div>
+            </div>
+      -->
+
       <div class="row">
         <div class="col-xs-12">
           <button type="submit" style="margin-left: 300px;padding: 6px 12px" class="btn btn-" [disabled]="!deviceForm.valid">Save</button>
@@ -93,6 +106,29 @@
   </div>
 </div>
 
+<p-dialog [(visible)]="displayPopUp" modal="modal" width="500" responsive="true" closable="true">
+  <p-header style="margin-left: 168px">
+    Business Information
+  </p-header>
+  <div class="text-center"></div>
+  <t4ss-data-table [dataSet]=businessList
+                   [listener]=component
+                   [enableFilter]="true"
+                   [enablePagination]="true"
+                   [actualPage]=actualPage
+                   [totalItems]=totalItems
+                   [dataPerPage]=dataPerPage>
+    <datatable-column [dataColumn]=true [value]="'business_id'" [header]="'Business ID'"></datatable-column>
+    <datatable-column [dataColumn]=true [value]="'business_name'" [header]="'Business Name'"></datatable-column>
+    <datatable-column [dataColumn]=true [value]="'business_id_number'" [header]="'Business ID number'"></datatable-column>
+    <datatable-column [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
+  </t4ss-data-table>
+  <p-footer>
+    <div class="modal-footer">
+      <button class="btn btn-ok-modal btn-primary" type="button" (click)="closeBusinesInformation()">OK</button>
+    </div>
+  </p-footer>
+</p-dialog>
 
 
 
@@ -130,4 +166,5 @@
     </div><!-- /.box -->
   </div>
 </div>
+
 
