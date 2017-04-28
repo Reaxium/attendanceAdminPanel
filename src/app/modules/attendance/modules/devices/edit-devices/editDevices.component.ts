@@ -35,6 +35,7 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
   businessWorkerType = '0';
   displayPopUp: boolean;
   owner: boolean;
+  worker: boolean;
   //editBusiness: EditBusinessComponent; this.editBusiness.getBusinessObservableCustom(this.prueba); (usar clases nuevas)
 
   /* variables para la tabla */
@@ -70,11 +71,11 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
         this.getBusinessRelatedToDevice(params.device_id);
       }
     );
+    console.log("this.worker", this.worker);
   }
 
   onSubmit(){
-    console.log('onSubmit');
-    console.log("this.businessOwnerList",this.businessList);
+    this.getBusinessRelated(this.deviceForm.value.businessOwnerId);
     const newDevice = this.deviceForm.value;
     const userInformation = sessionStorage.getItem('userInformation');
     const userID = JSON.parse(userInformation).userId;
@@ -96,23 +97,53 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
       device_name: [params.device_name, Validators.required],
       device_serial: [params.device_serial, Validators.required],
       business_owner_name: [this.businessOwnerName, Validators.required],
-      business_owner_id: [this.businessOwnerId, Validators.required]
-      //business_worker_name: [params.business_worker_name, Validators.required],
-      //business_worker_id: [params.business_worker_id, Validators.required]
+      business_owner_id: [this.businessOwnerId, Validators.required],
+      business_worker_name: [this.businessWorkerName, Validators.required],
+      business_worker_id: [this.businessOwnerName, Validators.required]
     });
 
   }
 
+
   private listOfBusiness(businessTypeId: any,businessID: any){
-    console.log("businessTypeId",businessTypeId);
-    this.owner = businessTypeId=="2"?true:false;
-    businessTypeId = businessTypeId=="1"?"2":"1";
-    this.getAllBusinessByType(businessTypeId,businessID);
-    this.displayPopUp = true;
+    if(businessTypeId=="2" || this.businessOwnerName == 'Select Please'){
+      this.owner = true;
+      this.getAllBusinessByType(businessTypeId,"1");
+      this.displayPopUp = true;
+    }else if(businessTypeId=="1" || this.businessWorkerName == 'Select Please'){
+      this.displayPopUp = true;
+      this.owner = false;
+      this.worker = true;
+      this.getBusinessRelated(this.businessOwnerId);
+    }
+    console.log(this.businessList);
   }
 
-  closeBusinesInformation(){
+  closeBusinesInformation(flat: boolean){
     this.displayPopUp = false;
+    console.log("this.displayPopUp",this.displayPopUp)
+    if(flat==true){
+      if(this.businessOwnerName != 'Select Please'){
+        this.worker = true;
+      }else{
+        this.worker = false;
+      }
+    }else if(flat==false){
+      if(this.worker == true && this.businessWorkerName!='Select Please'){
+        this.deleteBusinessSelect(this.businessWorkerId, this.objects);
+        this.businessWorkerName = 'Select Please';
+        this.businessWorkerId = '0';
+        console.log("this.objects",this.objects);
+      }else{
+        this.deleteBusinessSelect(this.businessOwnerId, this.objects);
+        this.deleteBusinessSelect(this.businessWorkerId, this.objects);
+        this.businessOwnerName = 'Select Please';
+        this.businessWorkerName = 'Select Please';
+        this.businessOwnerId = '0';
+        this.businessWorkerId = '0';
+        console.log("this.objects",this.objects);
+      }
+    }
   }
 
   searchObjList(businessID: string): boolean{
@@ -132,6 +163,7 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
       let index: number = objects.indexOf(BusinessID);
       objects.splice(index, 1);
   }
+
 
   /* Servicios */
 
@@ -202,6 +234,34 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
     });
   }
 
+  getBusinessRelated(businessID: string): void {
+    var parameters = {
+      ReaxiumParameters: {
+        Business: {
+          business_id: businessID,
+          filter: this.actualQuery,
+          page: this.actualPage,
+          sort: this.actualSort,
+          limit: this.dataPerPage
+        }
+      }
+    };
+    this.deviceService.getBusinessAndRelations(parameters).subscribe(response => {
+      if (response.ReaxiumResponse.code == 0) {
+        this.totalItems = response.ReaxiumResponse.object.totalRecords;
+        this.businessList = response.ReaxiumResponse.object.data;
+        console.log("this.businessList= ",this.businessList);
+        for(let i=0;i<this.businessList.length;i++){
+          if(this.searchObjList(this.businessList[i].business_id)){
+            this.businessList[i].check = true;
+          }
+        }
+      } else {
+        this.businessList = [];
+      }
+    });
+  }
+
   getHandlerResponse(response:ResponseReaxium): void {
     if(response.ReaxiumResponse.code != Constants.SUCCESSFUL_RESPONSE_CODE){
       console.log("Error servicio: "+ response.ReaxiumResponse.message);
@@ -222,14 +282,14 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
       this.actualQuery = "";
       if(this.owner == true){
         this.getAllBusinessByType(this.businessOwnerType,null);
-      }else {
+      }else if(this.worker == true){
         this.getAllBusinessByType(this.businessWorkerType,null);
       }
     } else if (query.length > 2) {
       this.actualQuery = query;
       if(this.owner == true){
         this.getAllBusinessByType(this.businessOwnerType,null);
-      }else {
+      }else if(this.worker == true){
         this.getAllBusinessByType(this.businessWorkerType,null);
       }
     }
@@ -239,7 +299,7 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
     this.actualSort = columnName;
     if(this.owner == true){
       this.getAllBusinessByType(this.businessOwnerType,null);
-    }else {
+    }else if(this.worker == true){
       this.getAllBusinessByType(this.businessWorkerType,null);
     }
   }
@@ -249,7 +309,7 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
     this.actualPage = page;
     if(this.owner == true){
       this.getAllBusinessByType(this.businessOwnerType,null);
-    }else {
+    }else if(this.worker == true){
       this.getAllBusinessByType(this.businessWorkerType,null);
     }
   }
@@ -264,20 +324,13 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
             this.objects.push(dataObject.business_id);
             this.businessOwnerId = dataObject.business_id;
             this.businessOwnerName =dataObject.business_name;
-            console.log("this.businessOwnerId2",this.businessOwnerId);
-            console.log("this.businessOwnerName2",this.businessOwnerName);
-          }else{
-            console.log("ENTRO EN WORKER");
-            console.log("owner",this.owner);
+          }else if(this.worker == true){
             this.deleteBusinessSelect(this.businessWorkerId, this.objects);
             this.objects.push(dataObject.business_id);
             this.businessWorkerId = dataObject.business_id;
             this.businessWorkerName =dataObject.business_name;
           }
         }
-        console.log("this.objects",this.objects);
-        console.log("this.businessOwnerId",this.businessOwnerId);
-        console.log("this.businessOwnerName",this.businessOwnerName);
         break;
       case "delete":
         console.log("Borrando business: ");

@@ -57,7 +57,6 @@ export class BusinessService {
   }
 
   getBusinessAndRelations(parameters: any): Observable<ResponseWithPagination> {
-    console.log("llego 1");
     return this.http.post(this.businessGetRelations, JSON.stringify(parameters), this.headers)
       .map(response => response.json() as ResponseWithPagination)
       .catch(this.handleErrorObservable);
