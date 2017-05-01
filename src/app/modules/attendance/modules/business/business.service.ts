@@ -23,10 +23,10 @@ import {ResponseReaxium} from "../../../login/services/responseReaxium";
 @Injectable()
 export class BusinessService {
   private business: Business;
-  private businessGetApiURL = "http://localhost:8000/attendance_cloud/Business/allBusinessFiltered";
-  private businessGetRelations = "http://localhost:8000/attendance_cloud/Business/getBusiness";
-  private businessStoreApiURL = "http://localhost:8000/attendance_cloud/Business/createBusiness";
-  private businessDeleteApiURL = "http://localhost:8000/attendance_cloud/Business/deleteBusiness";
+  private businessGetApiURL = "http://localhost/attendance_cloud/Business/allBusinessFiltered";
+  private businessGetRelations = "http://localhost/attendance_cloud/Business/getBusinessRelations";
+  private businessStoreApiURL = "http://localhost/attendance_cloud/Business/createBusiness";
+  private businessDeleteApiURL = "http://localhost/attendance_cloud/Business/deleteBusiness";
   //private businesssApiURL = "http://34.208.166.161/school_bus_cloud/Business/allBusinessFiltered";
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -57,7 +57,6 @@ export class BusinessService {
   }
 
   getBusinessAndRelations(parameters: any): Observable<ResponseWithPagination> {
-    console.log("llego 1");
     return this.http.post(this.businessGetRelations, JSON.stringify(parameters), this.headers)
       .map(response => response.json() as ResponseWithPagination)
       .catch(this.handleErrorObservable);

@@ -89,6 +89,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       if (response.ReaxiumResponse.code == 0) {
         this.totalItems = response.ReaxiumResponse.object.totalRecords;
         this.business = response.ReaxiumResponse.object.data;
+        console.log("this.business",this.business);
       } else {
         this.business = [];
       }

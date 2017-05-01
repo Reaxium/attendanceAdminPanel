@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
     <p-growl [value]="msgs" [life]="3000"></p-growl>
-    <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()"> <!-- (ngSubmit)="onSubmit()"> -->
 
       <div class="form-group">
         <label type="hidden" for="device_id"></label>
@@ -10,6 +10,24 @@
           id="device_id"
           class="form-control"
           formControlName="device_id">
+      </div>
+
+      <div class="form-group">
+        <label type="hidden" for="business_owner_id"></label>
+        <input
+          type="hidden"
+          id="business_owner_id"
+          class="form-control"
+          formControlName="business_owner_id">
+      </div>
+
+      <div class="form-group">
+        <label type="hidden" for="business_worker_id"></label>
+        <input
+          type="hidden"
+          id="business_worker_id"
+          class="form-control"
+          formControlName="business_worker_id">
       </div>
 
 
@@ -22,19 +40,6 @@
               id="device_name"
               class="form-control"
               formControlName="device_name">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="device_description">Device Description</label>
-            <input
-              type="text"
-              id="device_description"
-              class="form-control"
-              formControlName="device_description">
           </div>
         </div>
       </div>
@@ -55,46 +60,137 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <button type="submit" style="margin-left: 300px;padding: 6px 12px" class="btn btn-" [disabled]="!deviceForm.valid">Save</button>
-          <a class="btn btn-" style="margin-left: 8px"  (click)="onCancel()">Cancel</a> <!-- -->
+          <div class="form-group">
+            <label for="business_owner_name">Business Owner Related</label>
+            <tr>
+              <input
+                type="text"
+                id="business_owner_name"
+                class="form-control"
+                [(ngModel)]="businessOwnerName"
+                formControlName="business_owner_name" readonly>
+              <td>
+                <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
+                        type="button"
+                        (click)="listOfBusiness(businessOwnerType,businessOwnerId)"
+                        title="Show Business">
+                  <i class="fa fa-search"></i>
+                </button>
+              </td> <!-- [hidden]="!displayAlert" -->
+            </tr>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="business_worker_name">Business Worker Related</label>
+            <tr>
+              <input
+                type="text"
+                id="business_worker_name"
+                class="form-control"
+                [(ngModel)]="businessWorkerName"
+                formControlName="business_worker_name" readonly>
+              <td>
+                <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
+                        type="button"
+                        (click)="listOfBusiness(businessWorkerType,businessWorkerId)"
+                        title="Show Business" [disabled]="!worker">
+                  <i class="fa fa-search"></i>
+                </button>
+              </td>
+            </tr>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" style="margin-left: 300px;padding: 6px 12px" class="btn btn-"
+                  [disabled]="!deviceForm.valid">Save
+          </button>
+          <a class="btn btn-" style="margin-left: 8px" (click)="onCancel()">Cancel</a>
         </div>
       </div>
     </form>
   </div>
 </div>
+<!-- <div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="deviceFormWorker" (ngSubmit)="onSubmitWorker()">
 
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-sm 12">
-    <div class="content">
-      <div class="box box-primary box-solid">
-        <div class="box-body">
-          <div class="col-md-5">
-            <div class="box-no-shadow box-info">
-              <div class="box-search">
-                <table>
-                  <tbody>
-                  <tr>
-                    <h3 style="width: 300px;margin: 41px 0px 10px">Add School</h3>
-                    <td>  <!--(click)="businessInformation()" -->
-                      <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
-                              type="button"
-                              style="margin-top: 33px"
-                              title="Show Business">
-                        <i class="fa fa-search"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+      <div class="form-group">
+        <label type="hidden" for="business_worker_id"></label>
+        <input
+          type="hidden"
+          id="business_worker_id"
+          class="form-control"
+          formControlName="business_worker_id">
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="business_worker_name">Business Worker Related</label>
+            <tr>
+              <input
+                type="text"
+                id="business_worker_name"
+                class="form-control"
+                [(ngModel)]="businessWorkerName"
+                formControlName="business_worker_name" readonly>
+              <td>
+                <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
+                        type="button"
+                        (click)="listOfBusiness(businessWorkerType,businessWorkerId)"
+                        title="Show Business">
+                  <i class="fa fa-search"></i>
+                </button>
+              </td>
+            </tr>
           </div>
-
-          <!--Tables business-->
-
         </div>
-      </div><!-- /.box-body -->
-    </div><!-- /.box -->
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" style="margin-left: 300px;padding: 6px 12px" class="btn btn-"
+                  [disabled]="!deviceFormWorker.valid">Save
+          </button>
+          <a class="btn btn-" style="margin-left: 8px" (click)="onCancel()">Cancel</a>
+        </div>
+      </div>
+    </form>
   </div>
-</div>
+</div>-->
+
+<p-dialog [(visible)]="displayPopUp" modal="modal" width="500" responsive="true" closable="true">
+  <p-header style="margin-left: 168px">
+    Business Information
+  </p-header>
+  <div class="text-center"></div>
+  <t4ss-data-table [dataSet]=businessList
+                   [listener]=component
+                   [enableFilter]="true"
+                   [enablePagination]="true"
+                   [actualPage]=actualPage
+                   [totalItems]=totalItems
+                   [dataPerPage]=dataPerPage>
+    <datatable-column [dataColumn]=true [value]="'business_id'" [header]="'Business ID'"></datatable-column>
+    <datatable-column [dataColumn]=true [value]="'business_name'" [header]="'Business Name'"></datatable-column>
+    <datatable-column [dataColumn]=true [value]="'business_id_number'"
+                      [header]="'Business ID number'"></datatable-column>
+    <datatable-column [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
+  </t4ss-data-table>
+  <p-footer>
+    <div class="modal-footer">
+      <button class="btn btn-ok-modal btn-primary" type="button" (click)="closeBusinesInformation(true)">OK</button>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ok-modal btn-primary" type="button" (click)="closeBusinesInformation(false)">Cancel</button>
+    </div>
+  </p-footer>
+</p-dialog>
+
 

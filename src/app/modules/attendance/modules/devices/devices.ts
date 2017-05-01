@@ -5,6 +5,7 @@ export class Device {
   device_name: string;
   device_id: number;
   device_serial: string;
+  device_description: string;
   device_bus_number: string;
   device_temp: string;
   device_last_conection: string;
