@@ -148,9 +148,11 @@
 }
 
 .fixed-section{
-    top: 90px;
-    max-height: 80vh;
-    overflow: scroll;
+  top: 90px;
+  max-height: 80vh;
+  overflow: scroll;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 .fixed-section ul li{
     list-style: none;

@@ -4,3 +4,16 @@
 .example-margin {
   margin: 0 10px;
 }
+
+.font-login{
+  font-size: 16px;
+  color: #212121;
+}
+
+.header{
+  background: linear-gradient(60deg, rgb(158, 158, 156), rgb(255, 255, 255));
+}
+
+.font-second-text{
+  font-size: 12px;
+}

@@ -24,7 +24,7 @@ import 'rxjs/add/operator/switchMap';
 @Injectable()
 export class UsersService {
 
-  private usersApiURL = "http://localhost/attendance_cloud/Users/getAllUsers";
+  private usersApiURL = "http://localhost:8000/attendance_cloud/Users/getAllUsers";
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
