@@ -17,3 +17,33 @@
 .font-second-text{
   font-size: 12px;
 }
+
+.form-control,
+.form-group .form-control {
+  border: 0;
+  background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(rgb(252, 175, 44), #D2D2D2);
+  background-size: 0 2px, 100% 1px;
+  background-repeat: no-repeat;
+  background-position: center bottom, center calc(100% - 1px);
+  background-color: transparent;
+  transition: background 0s ease-out;
+  float: none;
+  box-shadow: none;
+  border-radius: 0;
+  font-weight: 400;
+}
+
+.form-group.is-focused .form-control {
+  outline: none;
+  background-image: linear-gradient(rgb(160, 124, 53), rgb(160, 124, 53)), linear-gradient(rgb(252, 175, 44), #D2D2D2);
+  background-size: 100% 2px, 100% 1px;
+  box-shadow: none;
+  transition-duration: 0.3s;
+}
+.form-group.is-focused .form-control .material-input:after {
+  background-color: #A07C39
+}
+.form-group.is-focused label,
+.form-group.is-focused label.control-label {
+  color: #A07C39
+}

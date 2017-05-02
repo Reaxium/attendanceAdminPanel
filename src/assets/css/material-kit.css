@@ -35,8 +35,13 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
   line-height: 1.5em;
 }
 
+a{
+  text-decoration: none;
+}
+
 a, a:hover, a:focus {
   color: #a07c35;
+  text-decoration: none;
 }
 a .material-icons, a:hover .material-icons, a:focus .material-icons {
   vertical-align: middle;
@@ -1376,7 +1381,6 @@ output {
 .form-control,
 .form-group .form-control {
   border: 0;
-  background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(rgb(252, 175, 44), #D2D2D2);
   background-size: 0 2px, 100% 1px;
   background-repeat: no-repeat;
   background-position: center bottom, center calc(100% - 1px);
@@ -1995,8 +1999,9 @@ legend {
   color: inherit;
   padding-top: 17px;
   padding-bottom: 15px;
+  color: #212121;
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: uppercase;
   border-radius: 3px;
   transition: all 0.5s ease;
@@ -2678,11 +2683,10 @@ h2.title {
 .nav-tabs {
   background: #9c27b0;
   border: 0;
-  border-radius: 3px;
-  padding: 0 15px;
+  padding: 0 25px;
 }
 .nav-tabs > li > a {
-  color: #FFFFFF;
+  color: #666;
   border: 0;
   margin: 0;
   border-radius: 3px;
@@ -2693,12 +2697,20 @@ h2.title {
 .nav-tabs > li > a:hover {
   background-color: transparent;
   border: 0;
+  color: #E7AF00;
+}
+
+.nav-tabs > li > a:active {
+  background-color: transparent;
+  border: 0;
+  color: #E7AF00;
 }
 .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
   background-color: transparent;
   border: 0 !important;
-  color: #FFFFFF !important;
-  font-weight: 500;
+  color: #8E8E92 !important;
+  font-weight: 300;
+  margin-left: 30px;
 }
 .nav-tabs > li.disabled > a, .nav-tabs > li.disabled > a:hover {
   color: rgba(255, 255, 255, 0.5);
@@ -2825,11 +2837,18 @@ h2.title {
   display: inline-block;
   position: relative;
   width: 100%;
-  border-radius: 3px;
   color: rgba(0,0,0, 0.87);
   background: #fff;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
 }
+
+.card-dashboard {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  border-radius: 3px;
+}
+
 .card .card-height-indicator {
   margin-top: 100%;
 }
@@ -2885,6 +2904,15 @@ h2.title {
   border-radius: 3px;
   padding: 15px 0;
   background-color: #FFFFFF;
+}
+
+.card .tab-header{
+  margin: 15px;
+  /* border-radius: 3px; */
+  padding: 15px 0;
+  color: #212121;
+  border-bottom: 3px solid #efefef;
+  padding-bottom: 30px;
 }
 .card .header-primary {
   background: linear-gradient(60deg, rgb(252, 175, 44), rgb(255, 255, 255)) !important;
@@ -2945,8 +2973,13 @@ h2.title {
 }
 
 .card-nav-tabs {
-  margin-top: 45px;
+  margin-top: -50px;
 }
+
+card-data-tabs {
+  margin-top: -50px;
+}
+
 .card-nav-tabs .header {
   margin-top: -30px;
 }
@@ -3843,8 +3876,35 @@ select:focus {
 
 .border-separator{
   display: inline-block;
-  border-bottom: 2px solid #dadada;
+  border-bottom: 2px solid #efefef;
   padding-bottom: 10px;
   margin-top: 0;
-  width: 150px;
+  width: 220px;
 }
+
+.pw-10{
+  padding: 10px;
+}
+
+.color-icon-dash{
+  color: #8E8E92;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color: #212121 !important;
+  border-radius: 0px;
+  cursor: default;
+  border-bottom: 2px solid #E7AF00 !important;
+  border-bottom-color: transparent;
+}
+
+.card-data-tab {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  border-radius: 3px;
+  color: rgba(0,0,0, 0.87);
+  background: #fff;
+
+}
+

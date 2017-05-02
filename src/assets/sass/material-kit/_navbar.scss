@@ -35,10 +35,9 @@
       color: inherit;
       padding-top: 15px;
       padding-bottom: 15px;
-
       font-size: $mdb-btn-font-size-base;
       text-transform: uppercase;
-
+      color: $text-color-dark;
       border-radius: $border-radius-base;
 
       &:hover,

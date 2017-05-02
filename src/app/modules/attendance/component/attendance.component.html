@@ -1,56 +1,65 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.ico">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 </head>
 <body class="index-page">
-    <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="">
-            <div class="logo-container">
-              <div class="logo">
-                <img src="assets/img/logo-attendance.png" alt="Reaxium School Attendance" rel="tooltip"
-                     title="Reaxium School Attendance" data-placement="bottom" data-html="true">
-              </div>
-              <div class="brand">
+<nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-index">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="">
+        <div class="logo-container">
+          <div class="logo">
+            <img src="assets/img/logo-attendance.png" alt="Reaxium School Attendance" rel="tooltip"
+                 title="Reaxium School Attendance" data-placement="bottom" data-html="true">
+          </div>
+          <div class="brand">
 
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="collapse navbar-collapse" id="navigation-example">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a routerLink="dashboard" routerLinkActive="active">Dashboard</a></li>
-            <li><a routerLink="users" routerLinkActive="active">Users</a></li>
-            <li><a routerLink="devices" routerLinkActive="active">Devices</a></li>
-            <li><a routerLink="business" routerLinkActive="active">Business</a></li>
-          </ul>
-          <div class="collapse navbar-collapse" id="">
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-
-                  <div class="avatar">
-                    <img src="assets/img/default-avatar.png" alt="Circle Image" class="img-circle  img-user img-responsive img-raised">
-                  </div>
-
-              </li>
-            </ul>
           </div>
         </div>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navigation-example">
+      <ul class="nav navbar-nav navbar-left">
+        <li><a routerLink="dashboard" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="users" routerLinkActive="active">Users</a></li>
+        <li><a routerLink="devices" routerLinkActive="active">Devices</a></li>
+        <li><a routerLink="business" routerLinkActive="active">Business</a></li>
+      </ul>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <div class="avatar dropdown-toggle" data-toggle="dropdown">
+              <img src="assets/img/default-avatar.png" alt="Circle Image"
+                   class="img-circle  img-user img-responsive img-raised">
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+            </div>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+
+  </div>
+</nav>
 <router-outlet></router-outlet>
-    <H1>Footer</H1>
+<H1>Footer</H1>
 
 </body>
 </html>
