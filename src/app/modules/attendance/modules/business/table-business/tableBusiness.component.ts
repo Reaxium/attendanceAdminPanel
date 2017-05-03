@@ -30,12 +30,13 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
     this._options = value;
   }
 
-  master : boolean; //== true;//
-  //tableCustom: string; //normal owner worker
+  master : boolean;
   userId : string;
   msgs2: Message[] = [];
   business: Business[];
   component: TableBusinessComponent = this;
+  confirm: boolean;
+  dataDelete: any;
   actualPage: number = 1;
   totalItems: number = 0;
   dataPerPage: number = 5;
@@ -59,7 +60,6 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       title:"Borrar"
     }
   ];
-  objects: any[]=[];
 
   constructor(private route: ActivatedRoute,private businessService: BusinessService,private http: Http,private router: Router) {
   }
@@ -70,6 +70,20 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       const userTypeId = JSON.parse(userInformation).businessTypeId;
       this.master = userTypeId==3 ? true : false;
       this.userId = JSON.parse(userInformation).userId;
+  }
+
+  deleteItem(): void {
+    this.deleteBusiness(this.dataDelete);
+    this.confirm = false;
+    location.reload();//preguntar porque se carga tooooda la pagina y seria fino q solo la tabla.
+  }
+
+  alert(data: any): void {
+    this.dataDelete = data;
+  }
+
+  onCancel(): void {
+    this.confirm = false;
   }
 
   getBusinessObservable(): void {
@@ -135,7 +149,9 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
       case "delete":
         console.log("Borrando business: ");
         console.log(dataObject);
-        this.deleteBusiness(dataObject);
+        this.confirm = true;
+        this.alert(dataObject);
+        //this.deleteBusiness(dataObject);
         break;
     }
   }

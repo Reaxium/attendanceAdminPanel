@@ -15,3 +15,16 @@
   <datatable-column *ngIf="master" [actionColumn]=true [value]="" [header]="'Actions'" [options]="options"></datatable-column>
 </t4ss-data-table>
 
+<p-dialog [(visible)]="confirm" modal="modal" width="500" responsive="true" closable="true">
+  <p-header style="margin-left: 168px">
+    Confirm
+  </p-header>
+  <div class="text-center"></div>
+  Are you sure you want to delete?
+  <p-footer>
+    <div class="modal-footer">
+      <button class="btn btn-ok-modal btn-primary" type="button" (click)="deleteItem()">OK</button>
+      <button class="btn btn-ok-modal btn-primary" type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </p-footer>
+</p-dialog>

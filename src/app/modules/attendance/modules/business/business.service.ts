@@ -49,20 +49,36 @@ export class BusinessService {
       .catch(this.handleError);
   }
 
-
+  /**
+   * Se obtienen todos los busines con status = 1, paginacion y filtrado.
+   * @param parameters
+   * @returns {Observable<R>}
+   */
   getBusinessObservable(parameters: any): Observable<ResponseWithPagination> {
     return this.http.post(this.businessGetApiURL, JSON.stringify(parameters), this.headers)
       .map(response => response.json() as ResponseWithPagination)
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * Se obtienen los business relacionados al business enviado.
+   * @param parameters
+   * @returns {Observable<R>}
+   */
   getBusinessAndRelations(parameters: any): Observable<ResponseWithPagination> {
     return this.http.post(this.businessGetRelations, JSON.stringify(parameters), this.headers)
       .map(response => response.json() as ResponseWithPagination)
       .catch(this.handleErrorObservable);
   }
 
-
+  /**
+   *
+   * Llama al servicio para crear o editar un business
+   * @param business
+   * @param userID
+   * @param relationsID
+   * @returns {Observable<R>}
+   */
   storeOrEditBusiness(business: Business, userID: string, relationsID: string[]){
     if(business.business_type_id == "Worker"){
       business.business_type_id = "1";
@@ -89,6 +105,12 @@ export class BusinessService {
       .catch(this.handleErrorObservable);
   }
 
+  /**
+   * Llama al servicio para eliminar un business, que lo que hace es modificar su status = 3.
+   * @param business
+   * @param userID
+   * @returns {Observable<R>}
+   */
   deleteBusiness(business: Business, userID: string){
     var parameters = {
       ReaxiumParameters: {

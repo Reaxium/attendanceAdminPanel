@@ -72,11 +72,11 @@
               <td>
                 <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
                         type="button"
-                        (click)="listOfBusiness(businessOwnerType,businessOwnerId)"
+                        (click)="listOfBusinessOwner()"
                         title="Show Business">
                   <i class="fa fa-search"></i>
                 </button>
-              </td> <!-- [hidden]="!displayAlert" -->
+              </td>
             </tr>
           </div>
         </div>
@@ -96,7 +96,7 @@
               <td>
                 <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
                         type="button"
-                        (click)="listOfBusiness(businessWorkerType,businessWorkerId)"
+                        (click)="listOfBusinessWorker()"
                         title="Show Business" [disabled]="!worker">
                   <i class="fa fa-search"></i>
                 </button>
@@ -117,53 +117,6 @@
     </form>
   </div>
 </div>
-<!-- <div class="row">
-  <div class="col-xs-12">
-    <form [formGroup]="deviceFormWorker" (ngSubmit)="onSubmitWorker()">
-
-      <div class="form-group">
-        <label type="hidden" for="business_worker_id"></label>
-        <input
-          type="hidden"
-          id="business_worker_id"
-          class="form-control"
-          formControlName="business_worker_id">
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="business_worker_name">Business Worker Related</label>
-            <tr>
-              <input
-                type="text"
-                id="business_worker_name"
-                class="form-control"
-                [(ngModel)]="businessWorkerName"
-                formControlName="business_worker_name" readonly>
-              <td>
-                <button class=" btn-go btn-go-effect btn-flat hvr-bubble-float-left"
-                        type="button"
-                        (click)="listOfBusiness(businessWorkerType,businessWorkerId)"
-                        title="Show Business">
-                  <i class="fa fa-search"></i>
-                </button>
-              </td>
-            </tr>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button type="submit" style="margin-left: 300px;padding: 6px 12px" class="btn btn-"
-                  [disabled]="!deviceFormWorker.valid">Save
-          </button>
-          <a class="btn btn-" style="margin-left: 8px" (click)="onCancel()">Cancel</a>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>-->
 
 <p-dialog [(visible)]="displayPopUp" modal="modal" width="500" responsive="true" closable="true">
   <p-header style="margin-left: 168px">
@@ -192,5 +145,7 @@
     </div>
   </p-footer>
 </p-dialog>
+
+
 
 

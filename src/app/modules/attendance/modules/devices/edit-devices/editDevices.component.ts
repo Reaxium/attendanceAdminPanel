@@ -71,7 +71,8 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
         this.getBusinessRelatedToDevice(params.device_id);
       }
     );
-    console.log("this.worker", this.worker);
+
+
   }
 
   onSubmit(){
@@ -82,15 +83,15 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
     this.storeOrEditDevices(newDevice,userID,this.objects);
   }
 
-  onCancel(){
+  onCancel(): void {
     this.navigateBack();
   }
 
-  private navigateBack(){
+  private navigateBack(): void {
     this.router.navigate(['attendance/devices/table']);
   }
 
-  private initForm(params:any){
+  private initForm(params:any): void {
 
     this.deviceForm = this.formBuilder.group({
       device_id: [params.device_id],
@@ -105,23 +106,22 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
   }
 
 
-  private listOfBusiness(businessTypeId: any,businessID: any){
-    if(businessTypeId=="2" || this.businessOwnerName == 'Select Please'){
+  private listOfBusinessOwner(): void {
       this.owner = true;
-      this.getAllBusinessByType(businessTypeId,"1");
+      this.getAllBusinessByType("1","1");
       this.displayPopUp = true;
-    }else if(businessTypeId=="1" || this.businessWorkerName == 'Select Please'){
-      this.displayPopUp = true;
+  }
+
+  private listOfBusinessWorker(): void {
       this.owner = false;
       this.worker = true;
       this.getBusinessRelated(this.businessOwnerId);
-    }
-    console.log(this.businessList);
+      this.displayPopUp = true;
   }
 
-  closeBusinesInformation(flat: boolean){
+  closeBusinesInformation(flat: boolean): void {
+    this.businessList = [];
     this.displayPopUp = false;
-    console.log("this.displayPopUp",this.displayPopUp)
     if(flat==true){
       if(this.businessOwnerName != 'Select Please'){
         this.worker = true;
@@ -129,24 +129,25 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
         this.worker = false;
       }
     }else if(flat==false){
-      if(this.worker == true && this.businessWorkerName!='Select Please'){
-        this.deleteBusinessSelect(this.businessWorkerId, this.objects);
-        this.businessWorkerName = 'Select Please';
-        this.businessWorkerId = '0';
-        console.log("this.objects",this.objects);
-      }else{
+      if(this.owner == true){
         this.deleteBusinessSelect(this.businessOwnerId, this.objects);
         this.deleteBusinessSelect(this.businessWorkerId, this.objects);
         this.businessOwnerName = 'Select Please';
         this.businessWorkerName = 'Select Please';
         this.businessOwnerId = '0';
         this.businessWorkerId = '0';
-        console.log("this.objects",this.objects);
+        this.worker = false;
+        console.log("HOLA");
+      }else if(this.worker == true){
+        this.deleteBusinessSelect(this.businessWorkerId, this.objects);
+        this.businessWorkerName = 'Select Please';
+        this.businessWorkerId = '0';
+        console.log("CHAO");
       }
     }
   }
 
-  searchObjList(businessID: string): boolean{
+  searchObjList(businessID: string): boolean {
     let validate = false;
     if (this.objects.length > 0) {
       for(let i=0;i<this.objects.length;i++){
@@ -161,7 +162,9 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
 
   deleteBusinessSelect(BusinessID: any, objects: any[]): void{
       let index: number = objects.indexOf(BusinessID);
-      objects.splice(index, 1);
+      if (index !== -1) {
+        objects.splice(index, 1);
+      }
   }
 
 
@@ -192,7 +195,7 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
       if (response.ReaxiumResponse.code == 0) {
         this.totalItems = response.ReaxiumResponse.object.totalRecords;
         this.businessList = response.ReaxiumResponse.object.data;
-        console.log("this.businessOwnerList= ",this.businessList);
+        console.log("this.businessOwnerList= ",this.businessList[0]);
         for(let i=0;i<this.businessList.length;i++){
           if(this.searchObjList(this.businessList[i].business_id)){
             this.businessList[i].check = true;
@@ -226,6 +229,7 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
             this.businessWorkerName = this.businessRelatedToDevice[i].business_name;
             this.businessWorkerId = this.businessRelatedToDevice[i].business_id;
             this.businessWorkerType = this.businessRelatedToDevice[i].business_type_id;
+            this.worker = true;
           }
         }
       } else {
@@ -251,10 +255,17 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
         this.totalItems = response.ReaxiumResponse.object.totalRecords;
         this.businessList = response.ReaxiumResponse.object.data;
         console.log("this.businessList= ",this.businessList);
-        for(let i=0;i<this.businessList.length;i++){
-          if(this.searchObjList(this.businessList[i].business_id)){
-            this.businessList[i].check = true;
+        if(this.totalItems!=0){
+          for(let i=0;i<this.businessList.length;i++){
+            if(this.searchObjList(this.businessList[i].business_id)){
+              this.businessList[i].check = true;
+            }
           }
+        }else{
+          this.deleteBusinessSelect(this.businessWorkerId, this.objects);
+          this.businessWorkerName = 'Select Please';
+          this.businessWorkerId = '0';
+          this.businessList = [];
         }
       } else {
         this.businessList = [];
@@ -320,17 +331,22 @@ export class EditDeviceComponent implements onDataTableListener,OnInit{
       case "radio":
         if(!this.searchObjList(dataObject.business_id)){
           if(this.owner==true){
-            this.deleteBusinessSelect(this.businessOwnerId, this.objects);
+            if(this.businessOwnerId!='0'){
+              this.deleteBusinessSelect(this.businessOwnerId, this.objects);
+            }
             this.objects.push(dataObject.business_id);
             this.businessOwnerId = dataObject.business_id;
             this.businessOwnerName =dataObject.business_name;
           }else if(this.worker == true){
-            this.deleteBusinessSelect(this.businessWorkerId, this.objects);
+            if(this.businessWorkerId!='0'){
+              this.deleteBusinessSelect(this.businessWorkerId, this.objects);
+            }
             this.objects.push(dataObject.business_id);
             this.businessWorkerId = dataObject.business_id;
             this.businessWorkerName =dataObject.business_name;
           }
         }
+        console.log("this.objects: ", this.objects);
         break;
       case "delete":
         console.log("Borrando business: ");

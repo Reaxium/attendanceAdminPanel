@@ -131,16 +131,9 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
         status_id: [params.status_id, Validators.required],
         business_type_id: [this.businessTypeId, Validators.required]
       });
-       //this.getBusinessAndRelations(this.businessForm.value.business_id);
+
     }
 
-
-  /*storeOrEditBusiness(business: Business, userID: string){
-    this.businessService.storeOrEditBusiness(business,userID).subscribe(
-      data => console.log(data),
-      error => console.error  //(ResponseReaxium => this.getHandlerResponse(ResponseReaxium))
-    );
-  }*/
 
   /**
    * Metodo que llama al servicio que llama todos los business segun si tiene business id o no
@@ -189,9 +182,7 @@ export class EditBusinessComponent implements onDataTableListener,OnInit{//, OnD
         Business: {
           business_id: businessID,
           filter: this.actualQuery,
-          //page: this.actualPage,
-          sort: this.actualSort//,
-          //limit: this.dataPerPage
+          sort: this.actualSort
         }
       }
     };
