@@ -17,6 +17,7 @@ export class DeviceService {
   private devicesGetBusinessRelatedURL = "http://localhost/attendance_cloud/Device/getBusinessRelationsWithADevice";
   private devicesStoreApiURL = "http://localhost/attendance_cloud/Device/createDeviceOrUpdate";
   private businessGetRelations = "http://localhost/attendance_cloud/Business/getBusinessRelations";
+  private deviceDeleteApiURL = "http://localhost/attendance_cloud/Device/deleteDevice";
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {
@@ -65,6 +66,20 @@ export class DeviceService {
   getBusinessAndRelations(parameters: any): Observable<ResponseWithPagination> {
     return this.http.post(this.businessGetRelations, JSON.stringify(parameters), this.headers)
       .map(response => response.json() as ResponseWithPagination)
+      .catch(this.handleErrorObservable);
+  }
+
+  deleteDevice(device: Device, userID: string){
+    var parameters = {
+      ReaxiumParameters: {
+        ReaxiumDevice: {
+          device_id: device.device_id,
+          userIdInSession: userID
+        }
+      }
+    };
+    return this.http.post(this.deviceDeleteApiURL, JSON.stringify(parameters), this.headers)
+      .map(response => response.json() as ResponseReaxium)
       .catch(this.handleErrorObservable);
   }
 

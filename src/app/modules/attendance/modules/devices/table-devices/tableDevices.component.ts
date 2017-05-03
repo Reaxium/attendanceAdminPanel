@@ -8,6 +8,8 @@ import {DataTableOption} from "../../../../../util/data_table/option";
 import {Device} from "../devices";
 import {Message} from "primeng/components/common/api";
 import {Router} from "@angular/router";
+import {ResponseReaxium} from "../../../../login/services/responseReaxium";
+import {Constants} from "../../../../../commons/global/global.constants";
 @Component({
   selector: 'tableDevices-component',
   templateUrl: "./app/modules/attendance/modules/devices/table-devices/tableDevices.component.html",
@@ -22,14 +24,18 @@ export class TableDevicesComponent implements onDataTableListener,OnInit {
     this._options = value;
   }
   devices: Device[];
+  confirm: boolean;
+  dataDelete: any;
   businessIdUser : string;
-  msgs2: Message[] = [];
+  msgs: Message[] = [];
   component: TableDevicesComponent = this;
   actualPage: number = 1;
   totalItems: number = 0;
   dataPerPage: number = 10;
   actualQuery: string = "";
   actualSort: string = "device_name";
+  master : boolean;
+  userId : string;
   private _options: DataTableOption[] = [
     {
       id:"edit",
@@ -57,11 +63,32 @@ export class TableDevicesComponent implements onDataTableListener,OnInit {
   ngOnInit(): void {
     const userInformation = sessionStorage.getItem('userInformation');
     this.businessIdUser = JSON.parse(userInformation).businessId;
-    console.log("BUSINES ID USER",this.businessIdUser);
     this.getDevicesObservable();
     const userTypeId = JSON.parse(userInformation).businessTypeId;
-    //this.master = userTypeId==3 ? true : false;
+    this.master = userTypeId==3 ? true : false;
+    this.userId = JSON.parse(userInformation).userId;
+  }
 
+  deleteItem(){
+    this.deleteDevice(this.dataDelete);
+    this.confirm = false;
+    location.reload();
+  }
+
+  alert(data: any){
+    this.dataDelete = data;
+  }
+
+  cancel(){
+    this.confirm = false;
+  }
+
+  onCancel(){
+    this.navigateBack();
+  }
+
+  private navigateBack(){
+    this.router.navigate(['attendance/devices/table']);
   }
 
   /**
@@ -89,6 +116,25 @@ export class TableDevicesComponent implements onDataTableListener,OnInit {
         this.devices = [];
       }
     });
+  }
+
+  deleteDevice(device: Device){
+    this.deviceService.deleteDevice(device,this.userId).subscribe(
+      ResponseReaxium => this.getHandlerResponse(ResponseReaxium)
+    );
+  }
+
+  getHandlerResponse(response:ResponseReaxium): void {
+    if(response.ReaxiumResponse.code != Constants.SUCCESSFUL_RESPONSE_CODE){
+      console.log("Error servicio: "+ response.ReaxiumResponse.message);
+      this.msgs.push({
+        severity:'warn',
+        summary:'Invalidated',
+        detail: response.ReaxiumResponse.message
+      });
+    }else if(response.ReaxiumResponse.code == Constants.SUCCESSFUL_RESPONSE_CODE){
+      this.onCancel();
+    }
   }
 
   /* Metodos para la tabla */
@@ -122,7 +168,9 @@ export class TableDevicesComponent implements onDataTableListener,OnInit {
       case "delete":
         console.log("Borrando device: ");
         console.log(dataObject);
-        //this.deleteBusiness(dataObject);
+        //this.deleteDevice(dataObject);
+        this.confirm = true;
+        this.alert(dataObject);
         break;
     }
   }
