@@ -12,7 +12,7 @@ import {DataTableOption} from "../../../../../util/data_table/option";
 @Component({
   selector: 'users-component',
   templateUrl: "./app/modules/attendance/modules/users/component/users.component.html",
-  styleUrls: ["app/modules/attendance/modules/users/component/users.component.css"],
+  styleUrls: ["./app/modules/attendance/modules/users/component/users.component.css"],
   providers: [UsersService]
 })
 export class UsersComponent implements onDataTableListener, OnInit {
@@ -29,19 +29,19 @@ export class UsersComponent implements onDataTableListener, OnInit {
     {
       id:"edit",
       src: "",
-      className: "fa fa-fw fa-pencil",
-      type: "",
+      className: "fa fa-fw fa-pencil btn btn-accent btn-simple btn-xs btn-table-size",
+      type: "a",
       html: "",
       title:"Editar"
     },
     {
       id:"delete",
       src: "",
-      className: "fa fa-fw fa-trash",
-      type: "",
+      className: "fa fa-fw fa-trash btn btn-danger btn-simple btn-xs btn-table-size",
+      type: "a",
       html: "",
       title:"Borrar"
-    }
+    },
   ];
 
   constructor(private usersService: UsersService, private http: Http) {

@@ -7,7 +7,7 @@ body {
   left: 0;
   top: 0;
   content: "";
-  background-color: whitesmoke;
+  background-color: #ffffff;
 }
 body.inverse {
   background: #ffffff;
@@ -3896,6 +3896,7 @@ select:focus {
   cursor: default;
   border-bottom: 2px solid #E7AF00 !important;
   border-bottom-color: transparent;
+  transition: all 0.2s;
 }
 
 .card-data-tab {
@@ -3908,3 +3909,142 @@ select:focus {
 
 }
 
+
+.left-inner-addon {
+  position: relative;
+}
+.left-inner-addon input {
+  padding-left: 38px;
+}
+.left-inner-addon i {
+  position: absolute;
+  padding: 10px 12px;
+  pointer-events: none;
+  color: #8e8e92;
+}
+
+.right-inner-addon {
+  position: relative;
+}
+.right-inner-addon input {
+  padding-right: 30px;
+}
+.right-inner-addon i {
+  position: absolute;
+  right: 0px;
+  padding: 10px 12px;
+  pointer-events: none;
+}
+
+
+.filter-input_table{
+  width: 20%;
+  font-weight: 300;
+  background: #f5f5f5;
+  transition: background 0.3s ease;
+  border: 2px solid #efefef !important;
+  border-radius: 3px;
+}
+
+.filter-input_table:focus{
+  background: #ffffff;
+  transition: background 0.3s ease;
+}
+
+.btn_accent{
+  color: #1ECDFE;
+}
+
+.pd-table-10{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 400;
+  color: #8E8E92;
+}
+
+.btn.btn-xs, .btn-group-xs .btn, .navbar .navbar-nav > li > a.btn.btn-xs, .btn-group-xs
+.navbar .navbar-nav > li > a.btn {
+  padding: 3px 15px;
+  font-size: 15px;
+}
+
+.pagination.pagination-info > .active > a, .pagination.pagination-info > .active > a:focus, .pagination.pagination-info > .active > a:hover, .pagination.pagination-info > .active > span, .pagination.pagination-info > .active > span:focus, .pagination.pagination-info > .active > span:hover {
+  background-color: #03a9f4;
+  border-color: #03a9f4;
+  box-shadow: 0 4px 5px 0 rgba(3, 169, 244, 0.14), 0 1px 10px 0 rgba(3, 169, 244, 0.12), 0 2px 4px -1px rgba(3, 169, 244, 0.2);
+}
+
+.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus {
+  color: #999999;
+}
+
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
+  z-index: 2;
+  color: #23527c;
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+.pagination > li > a, .pagination > li > span {
+  border: 0;
+  border-radius: 30px !important;
+  transition: all .3s;
+  padding: 0px 11px;
+  margin: 0 3px;
+  min-width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: transparent;
+}
+
+.pagination>li>a, .pagination>li>span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  line-height: 1.42857143;
+  text-decoration: none;
+  color: #337ab7;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-left: -1px;
+}
+
+.center-table {
+  text-align: -webkit-center;
+}
+
+.float-button-table{
+  display: block;
+  position: absolute;
+  padding-top: 120px;
+}
+
+.float-rounded-button{
+  display: block;
+  box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
+  transform: scale(1);
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  font-size: 2.1875rem;
+  transition-delay: .2s;
+  color: rgb(255, 255, 255);
+  padding: 8px 0px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+  outline: 0px;
+  border-radius: 50%;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  transition: all 0.5s ease-in-out;
+}

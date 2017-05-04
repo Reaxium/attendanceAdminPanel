@@ -1,17 +1,21 @@
-.form-control, .form-group .form-control {
-  display: inline-block;
-  border: 2px solid #efefef !important;
-  padding-bottom: 7px;
-  margin-top: 0;
-  width: 220px;
-  background-repeat: no-repeat;
-  background-position: center bottom, center calc(100% - 1px);
-  background-color: transparent;
-  transition: background 0s ease-out;
-  float: none;
-  box-shadow: none;
-  border-radius: 0;
+.filter-input_table{
   font-weight: 300;
+  width: 220px;
+  background: #f5f5f5;
+  transition: background 0.3s ease;
+  border: 2px solid #efefef !important;
+  border-radius: 3px;
+}
+
+.filter-input_table:focus{
+  background: #ffffff;
+  transition: background 0.3s ease;
+}
+
+.nav-tabs {
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
 
 .left-inner-addon {
@@ -38,4 +42,12 @@
   right: 0px;
   padding: 10px 12px;
   pointer-events: none;
+}
+
+.margin-dashboard-container{
+  margin: 0 -55px;
+}
+
+.margin-tabs-container{
+  margin: 0 -15px;
 }

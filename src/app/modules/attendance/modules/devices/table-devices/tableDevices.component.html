@@ -1,6 +1,8 @@
-<div>
+<div style="float: right;
+    position: relative;
+    margin-top: 70px;">
   <p-growl [value]="msgs2" [life]="3000"></p-growl>
-  <button class="btn btn-" style="margin: -5px 400px" [routerLink]="['newDevice']">+</button>
+  <button class="float-rounded-button" [routerLink]="['newDevice']">+</button>
 </div>
 <t4ss-data-table [dataSet]=devices
                  [listener]=component

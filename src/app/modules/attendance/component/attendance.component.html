@@ -41,15 +41,15 @@
             <div class="avatar dropdown-toggle" data-toggle="dropdown">
               <img src="assets/img/default-avatar.png" alt="Circle Image"
                    class="img-circle  img-user img-responsive img-raised">
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
             </div>
           </li>
         </ul>
@@ -58,9 +58,24 @@
 
   </div>
 </nav>
-<router-outlet></router-outlet>
-<H1>Footer</H1>
+<div class="wrapper">
+  <div class="main main-raised">
+    <div class="container">
+      <div class="row">
 
+        <router-outlet></router-outlet>
+
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <div class="copyright text-center">
+      &copy; Copyright 2016-2017 Reaxium Development Team. All rights reserved.
+    </div>
+  </div>
+</footer>
 </body>
 </html>
 

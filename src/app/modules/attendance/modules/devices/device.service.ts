@@ -12,12 +12,12 @@ import {ResponseReaxium} from "../../../login/services/responseReaxium";
 @Injectable()
 export class DeviceService {
   private devices: Device;
-  private devicesGetApiURL = "http://localhost/attendance_cloud/Device/allDeviceWithPagination";
-  private devicesGetBusinessURL = "http://localhost/attendance_cloud/Business/allBusinessFiltered";
-  private devicesGetBusinessRelatedURL = "http://localhost/attendance_cloud/Device/getBusinessRelationsWithADevice";
-  private devicesStoreApiURL = "http://localhost/attendance_cloud/Device/createDeviceOrUpdate";
-  private businessGetRelations = "http://localhost/attendance_cloud/Business/getBusinessRelations";
-  private deviceDeleteApiURL = "http://localhost/attendance_cloud/Device/deleteDevice";
+  private devicesGetApiURL = "http://localhost:8000/attendance_cloud/Device/allDeviceWithPagination";
+  private devicesGetBusinessURL = "http://localhost:8000/attendance_cloud/Business/allBusinessFiltered";
+  private devicesGetBusinessRelatedURL = "http://localhost:8000/attendance_cloud/Device/getBusinessRelationsWithADevice";
+  private devicesStoreApiURL = "http://localhost:8000/attendance_cloud/Device/createDeviceOrUpdate";
+  private businessGetRelations = "http://localhost:8000/attendance_cloud/Business/getBusinessRelations";
+  private deviceDeleteApiURL = "http://localhost:8000/attendance_cloud/Device/deleteDevice";
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) {

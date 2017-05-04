@@ -1,29 +1,45 @@
-<input type="text" *ngIf=enableFilter [(ngModel)]=query (keyup)=filter($event) placeholder="Filter"/>
-<table>
-  <thead>
-  <tr>
-    <th *ngFor="let column of columns" (click)="sortByColumn(column.value)">{{column.header}}</th>
-  </tr>
-  </thead>
-  <tbody
-    *ngFor="let row of dataSet | paginate: {id: 'server', itemsPerPage: dataPerPage, currentPage: actualPage, totalItems:totalItems }">
-  <tr>
-    <td *ngFor="let column of columns">
-      <div *ngIf="column.dataColumn">{{row[column.value]}}</div>
-      <div *ngIf="column.actionColumn">
-        <td *ngFor="let option of column.options">
-          <a *ngIf="selectedOptionType(option,'a')" (click)="optionSelected(option,row)" title="{{option.title}}"><small><i class="{{option.className}}"></i></small></a>
-          <input *ngIf="selectedOptionType(option,'b')" type="checkbox" [checked]= "row.check" (click)="optionSelected(option,row)">
-          <input *ngIf="selectedOptionType(option,'c')" name="radio" type="radio" [value]="row" [checked]= "row.check" (click)="optionSelected(option,row)">
-        <!--  <form ngForm action="">
-            <input *ngIf="selectedOptionType(option,'c')" type="radio" (click)="optionSelected(option,row)">
-          </form>-->
+
+    <div class="section">
+      <div class="tim-row" id="tables-row ">
+        <div class="container">
+          <div class="left-inner-addon pd-table-10">
+            <i class="fa fa-search"></i>
+            <input type="text" *ngIf=enableFilter [(ngModel)]=query (keyup)=filter($event) placeholder="Filter"
+                   class="form-control filter-input_table"/>
+          </div>
+          <table class="table table-responsive center-table">
+            <thead>
+            <tr>
+              <th class="center-table" *ngFor="let column of columns" (click)="sortByColumn(column.value)">{{column.header}}</th>
+            </tr>
+            </thead>
+            <tbody
+              *ngFor="let row of dataSet | paginate: {id: 'server', itemsPerPage: dataPerPage, currentPage: actualPage, totalItems:totalItems }">
+            <tr class="center-table">
+              <td *ngFor="let column of columns" class="pd-table-10">
+                <div *ngIf="column.dataColumn" class="pd-table-10">{{row[column.value]}}</div>
+                <div *ngIf="column.actionColumn">
+              <td *ngFor="let option of column.options" class="center-table">
+                <a *ngIf="selectedOptionType(option,'a')" (click)="optionSelected(option,row)" title="{{option.title}}">
+                  <small><i class="{{option.className}}"></i></small>
+                </a>
+                <input *ngIf="selectedOptionType(option,'b')" type="checkbox" [checked]="row.check"
+                       (click)="optionSelected(option,row)" >
+                <input *ngIf="selectedOptionType(option,'c')" name="radio" type="radio" [value]="row"
+                       [checked]="row.check" (click)="optionSelected(option,row)">
+                <!--  <form ngForm action="">
+                    <input *ngIf="selectedOptionType(option,'c')" type="radio" (click)="optionSelected(option,row)">
+                  </form>-->
+              </td>
+        </div>
         </td>
+        </tr>
+        </tbody>
+        </table>
       </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<div *ngIf=enablePagination>
-  <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
-</div>
+      <div *ngIf=enablePagination >
+        <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+      </div>
+    </div>
+  </div>
+

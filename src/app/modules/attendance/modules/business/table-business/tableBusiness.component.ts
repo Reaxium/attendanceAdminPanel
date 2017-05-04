@@ -46,7 +46,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
     {
       id:"edit",
       src: "",
-      className: "fa fa-fw fa-pencil",
+      className: "fa fa-fw fa-pencil btn btn-accent btn-simple btn-xs btn-table-size",
       type: "a",
       html: "",
       title:"Editar"
@@ -54,7 +54,7 @@ export class TableBusinessComponent implements onDataTableListener,OnInit {
     {
       id:"delete",
       src: "",
-      className: "fa fa-fw fa-trash",
+      className: "fa fa-fw fa-trash btn btn-danger btn-simple btn-xs btn-table-size",
       type: "a",
       html: "",
       title:"Borrar"
